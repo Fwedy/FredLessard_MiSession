@@ -9,7 +9,16 @@ public class OptionsScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!PlayerPrefs.HasKey("mainVolume"))
+        {
+            PlayerPrefs.SetFloat("mainVolume", 1);
+            LoadPP();
+        }
+
+        else
+        {
+            LoadPP();
+        }
     }
 
     // Update is called once per frame
@@ -22,14 +31,24 @@ public class OptionsScript : MonoBehaviour
         }
     }
 
-    private void VolumeChanged()
+    public void VolumeChanged()
     {
-        
-        
+        AudioListener.volume = VolumeSlider.value;
+        SavePP();
     }
 
+    private void LoadPP()
+    {
+        VolumeSlider.value = PlayerPrefs.GetFloat("mainVolume");
+    }
+
+    private void SavePP()
+    {
+        PlayerPrefs.SetFloat("mainVolume", VolumeSlider.value);
+    }
     private void CloseOptions()
     {
+
         gameObject.SetActive(false);
     }
         
