@@ -32,11 +32,13 @@ public abstract class Zombie_Base : MonoBehaviour
 }
 public class ZombieCrawler : Zombie_Base
 {
+    ZombieMovement zombMovement = new ZombieMovement();
     public ZombieCrawler()
     {
         HP = 30;
         maxHP = 30;
         speed = 1f;
+        
     }
 
     private void Awake()
@@ -46,7 +48,7 @@ public class ZombieCrawler : Zombie_Base
     }
     private void Start()
     {
-        ZombieMovement zombMovement = gameObject.GetComponent<ZombieMovement>();
+        zombMovement = gameObject.GetComponent<ZombieMovement>();
         SpawnSpeed();
         zombMovement.SetSpeed(this.speed);
     }
@@ -69,8 +71,19 @@ public class ZombieCrawler : Zombie_Base
 
     public override void Death()
     {
+        StartCoroutine(DeathCoroutine());
+        
+    }
+    IEnumerator DeathCoroutine()
+    {
+        var animator = GetComponent<Animator>();
+        animator.SetBool("Dead", true);
+        zombMovement.dead = true;
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
+
 
     public override void HPMultiplier(float multiplier)
     {

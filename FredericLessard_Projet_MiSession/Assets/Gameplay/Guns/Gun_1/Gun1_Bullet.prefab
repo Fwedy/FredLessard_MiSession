@@ -11,6 +11,18 @@ PrefabInstance:
       propertyPath: speed
       value: 1200
       objectReference: {fileID: 0}
+    - target: {fileID: 82360399978996418, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: bulletSO
+      value: 
+      objectReference: {fileID: 11400000, guid: e1baf81fe1006f940b21008105ad1d13, type: 2}
+    - target: {fileID: 277850547046396390, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 277850547046396390, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1434858268439673486, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
       propertyPath: m_Name
       value: Gun1_Bullet

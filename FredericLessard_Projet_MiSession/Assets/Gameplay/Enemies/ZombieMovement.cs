@@ -10,6 +10,8 @@ public class ZombieMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private ZombieManager zombieScript;
+
+    public bool dead = false;
     private void Start()
     {
         //speed = Random.Range(1f, 3.5f);
@@ -23,16 +25,19 @@ public class ZombieMovement : MonoBehaviour
 
     private void Update()
     {
-        Vector2 direction = playerTransform.position - transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
-        
-        if (direction.x < 0)
+        if (!dead)
         {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
+            Vector2 direction = playerTransform.position - transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+
+            if (direction.x < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
 

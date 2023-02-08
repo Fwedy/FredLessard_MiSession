@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
-     public float speed;
-    [SerializeField] float damage;
+     private float speed;
+     private float damage;
 
     private ObjectPool_Bullets bulletPool;
     private SpriteRenderer spriteRenderer;
+
+    public BulletScriptableObject bulletSO;
     // Start is called before the first frame update
     void Start()
     {
         bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = bulletSO.sprite;
+        this.damage = bulletSO.damage;
+        this.speed = bulletSO.speed;
+        
     }
 
     private void OnEnable()

@@ -57,7 +57,7 @@ public class GunBase : MonoBehaviour
 
 
         Rigidbody2D rigidBody = newBullet.GetComponent<Rigidbody2D>();
-        rigidBody.AddForce(gameObject.transform.right * bulletType.speed);
+        rigidBody.AddForce(gameObject.transform.right * bulletType.bulletSO.speed);
 
         
     }
