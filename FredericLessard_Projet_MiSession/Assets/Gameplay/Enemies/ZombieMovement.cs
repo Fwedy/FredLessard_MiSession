@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class ZombieMovement : MonoBehaviour
 {
-    public Transform playerTransform;
-    private float speed;
+    private Transform playerTransform;
+    public float speed;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private ZombieManager zombieScript;
     private void Start()
     {
-        speed = Random.Range(1f, 3.5f);
+        //speed = Random.Range(1f, 3.5f);
+        zombieScript = gameObject.GetComponent<ZombieManager>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        
-        animator = gameObject.GetComponent<Animator>();
-        animator.SetFloat("Speed", speed);
+
+
         
     }
 
@@ -33,5 +34,12 @@ public class ZombieMovement : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+    }
+
+    public void SetSpeed(float s)
+    {
+        speed = s;
+        animator = gameObject.GetComponent<Animator>();
+        animator.SetFloat("Speed", speed);
     }
 }

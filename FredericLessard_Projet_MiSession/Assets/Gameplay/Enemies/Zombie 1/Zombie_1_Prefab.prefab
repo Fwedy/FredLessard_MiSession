@@ -53,7 +53,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1060718672099750433, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
       propertyPath: m_Name
-      value: Zombie_Base
+      value: Zombie_1_Prefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1060718672099750433, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_TagString
+      value: Zombie_Crawler
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719263596435467286, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 575e581043f14f14fa186cb904f94e83, type: 2}
+    m_RemovedComponents:
+    - {fileID: 1883422656505342285, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+--- !u!1 &7809094433020874417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1060718672099750433, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+  m_PrefabInstance: {fileID: 7126686925981858960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2193941247743940464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7809094433020874417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1dd712cefbc84dac7715d4411abf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

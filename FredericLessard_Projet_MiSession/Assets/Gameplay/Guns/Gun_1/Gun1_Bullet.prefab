@@ -15,6 +15,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun1_Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 3133608250491226909, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0975517
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133608250491226909, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_Size.y
+      value: 0.09672131
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133608250491226909, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0019977838
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133608250491226909, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0007247906
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133608250491226909, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4817598262686232970, guid: 0e7a7d14767226c4c9aa992ee2a76897, type: 3}
       propertyPath: m_RootOrder
       value: 0

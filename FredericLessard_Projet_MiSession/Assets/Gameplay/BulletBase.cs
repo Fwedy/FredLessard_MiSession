@@ -20,6 +20,20 @@ public class BulletBase : MonoBehaviour
     {
         StartCoroutine(VisibilityDisable());
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        bool x = true; 
+        if (collision.tag.Contains("Zombie") && x)
+        {
+            collision.gameObject.GetComponent<ZombieManager>().ZombTakeDamage(10);
+            x = false;
+            gameObject.SetActive(false);
+        }
+        
+    }
+
+
     IEnumerator VisibilityDisable()
     {
         yield return new WaitForSeconds(1);
