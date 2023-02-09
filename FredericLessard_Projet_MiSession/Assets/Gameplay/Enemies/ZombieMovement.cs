@@ -5,11 +5,13 @@ using UnityEngine;
 public class ZombieMovement : MonoBehaviour
 {
     private Transform playerTransform;
-    public float speed;
+   [SerializeField] private float speed;
+   [SerializeField] private float weight;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private ZombieManager zombieScript;
+    private Rigidbody2D rb;
 
     public bool dead = false;
     private void Start()
@@ -18,7 +20,9 @@ public class ZombieMovement : MonoBehaviour
         zombieScript = gameObject.GetComponent<ZombieManager>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
+        
+        rb = GetComponent<Rigidbody2D>();
+        rb.mass = weight;
 
         
     }

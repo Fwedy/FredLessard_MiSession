@@ -19,42 +19,100 @@ public class CrawlerZombieFactory : AbstractEnemyFactory
     }
 }
 
+public class RunnerCreatureFactory : AbstractEnemyFactory
+{
+
+    public override GameObject CreateZombie()
+    {
+        var zombie = Instantiate(zombiePrefab);
+        return zombie;
+    }
+}
+
 public class ZombieSpawner : MonoBehaviour
 {
     private AbstractEnemyFactory currrentFactory;
 
     private CrawlerZombieFactory crawlerFactory;
+    private RunnerCreatureFactory runnerFactory;
 
     [SerializeField] GameObject crawlerPrefab;
-    private Vector3 spawnerLoc;
+    [SerializeField] GameObject runnerPrefab;
+    private Vector2 spawnerLoc;
+
+    private GameManager gameManager;
+    public bool active = false;
+
+    public float hpMultiplier;
+    public float speedMultiplier;
     // Start is called before the first frame update
     void Start()
     {
         crawlerFactory = gameObject.AddComponent<CrawlerZombieFactory>();
         crawlerFactory.zombiePrefab = crawlerPrefab;
         currrentFactory = crawlerFactory;
-        spawnerLoc = new Vector3(transform.position.x, transform.position.y, 0);
+
+        runnerFactory = gameObject.AddComponent<RunnerCreatureFactory>();
+        runnerFactory.zombiePrefab = runnerPrefab;
+        
+
+        spawnerLoc = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         StartCoroutine(SpawnRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        //StartCoroutine(SpawnRoutine());
     }
+
+    private void RandomizeCreatureSpawns()
+    {
+       var x =  Random.Range(1, 3);
+        if (x < 1.5)
+        {
+            currrentFactory = runnerFactory;
+        }
+        else
+        {
+            currrentFactory = crawlerFactory;
+        }
+    }
+
 
     public GameObject CreateNewZombie()
     {
+
         return currrentFactory.CreateZombie();
+        
+    }
+
+    public void TurnOn()
+    {
+        active = true;
+        StartCoroutine(SpawnRoutine());
     }
 
     IEnumerator SpawnRoutine()
     {
-        while (true)
+
+        while (gameManager.enemiesLeftToSpawn > 0 && active)
         {
-            
-            Instantiate(CreateNewZombie(), spawnerLoc, Quaternion.identity);
+            RandomizeCreatureSpawns();
+            var newZomb = CreateNewZombie();
+            newZomb.transform.position = spawnerLoc;
+
+            newZomb.GetComponent<ZombieManager>().ZombAddHP(hpMultiplier);
+            newZomb.GetComponent<ZombieManager>().ZombAddSpeed(speedMultiplier);
+
+            gameManager.enemiesLeftToSpawn -= 1;
+
             yield return new WaitForSeconds(4);
+
+
         }
+        
     }
 }

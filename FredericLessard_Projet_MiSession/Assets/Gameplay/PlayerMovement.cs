@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     
     private SpriteRenderer spriteRenderer;
     public Animator animator;
+    private Rigidbody2D rb;
 
     [SerializeField] private ArmsManager armsManager;
     private GameObject backHand;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         backHand = armsManager.backHand;
+        rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
@@ -35,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        Vector3 movement = (transform.right * horizontal + transform.up * vertical) * currentSpeed * Time.deltaTime;
-        transform.position += movement;
+        Vector3 movement = (transform.right * horizontal + transform.up * vertical) * currentSpeed;
+        // transform.position += movement;
+        rb.velocity = new Vector2(movement.x, movement.y);
+
 
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenToWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
