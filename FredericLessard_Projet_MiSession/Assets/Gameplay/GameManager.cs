@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject OptionsMenu;
+    [SerializeField] private TextMeshProUGUI roundTXT;
 
     private static GameManager instance;
 
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
         roundNumber += 1;
         enemiesLeftToSpawn = 5 * roundNumber;
         enemiesAlive = enemiesLeftToSpawn;
+
+        roundTXT.text = roundNumber.ToString();
     }
 
     public void EnemyDied()

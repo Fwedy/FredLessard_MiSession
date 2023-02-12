@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public abstract class Zombie_Base : MonoBehaviour
 {
@@ -9,15 +10,25 @@ public abstract class Zombie_Base : MonoBehaviour
     protected float speed;
     protected Rigidbody2D rb;
     protected GameManager gameManager;
+    public AIPath path;
+    protected ZombieMovement zombMovement = new ZombieMovement();
 
     public float GetSpeed()
     {
         return speed;
     }
 
-    public virtual void TakeDamage(int damage) { }
+    public virtual void Start()
+    {
 
-    public virtual void Death() { }
+        
+        path.maxSpeed = this.GetSpeed();
+
+    }
+
+    public virtual void TakeDamage(float damage) { }
+
+    public virtual void Death() { path.maxSpeed = 0; }
 
     public virtual void Attack() { }
 
@@ -34,13 +45,13 @@ public abstract class Zombie_Base : MonoBehaviour
 }
 public class ZombieCrawler : Zombie_Base
 {
-    ZombieMovement zombMovement = new ZombieMovement();
+    
     public ZombieCrawler()
     {
         HP = 30;
         maxHP = 30;
         speed = 1f;
-        
+       
     }
 
     private void Awake()
@@ -48,13 +59,17 @@ public class ZombieCrawler : Zombie_Base
 
 
     }
-    private void Start()
+    public override void Start()
     {
+
         rb = gameObject.GetComponent<Rigidbody2D>();
         zombMovement = gameObject.GetComponent<ZombieMovement>();
         SpawnSpeed();
         zombMovement.SetSpeed(this.speed);
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        base.Start();
+        
     }
 
     public override void SpawnSpeed()
@@ -62,12 +77,12 @@ public class ZombieCrawler : Zombie_Base
         speed = Random.Range(0.2f, 1.3f);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         Debug.Log("sd");
         HP -= damage;
         Debug.Log(HP);
-        if (HP <= 0)
+        if (HP <= 0f)
         {
             Death();
         }
@@ -75,6 +90,8 @@ public class ZombieCrawler : Zombie_Base
 
     public override void Death()
     {
+        base.Death();
+
         StartCoroutine(DeathCoroutine());
         
     }
@@ -99,6 +116,7 @@ public class ZombieCrawler : Zombie_Base
     public override void SpeedMultiplier(float multiplier)
     {
         speed += multiplier;
+        path.maxSpeed = this.speed;
     }
 
     /*public override ZombieBase ZombieFactory()
@@ -109,13 +127,13 @@ public class ZombieCrawler : Zombie_Base
 
 public class RunnerCreature : Zombie_Base
 {
-    ZombieMovement zombMovement = new ZombieMovement();
+    
     public RunnerCreature()
     {
-        HP = 50;
+        HP = 50f;
         maxHP = 50;
         speed = 2f;
-
+        
     }
 
     private void Awake()
@@ -123,13 +141,15 @@ public class RunnerCreature : Zombie_Base
 
 
     }
-    private void Start()
+    public override void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         zombMovement = gameObject.GetComponent<ZombieMovement>();
         SpawnSpeed();
         zombMovement.SetSpeed(this.speed);
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        base.Start();
 
     }
 
@@ -138,12 +158,12 @@ public class RunnerCreature : Zombie_Base
         speed = Random.Range(0.6f, 2.5f);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         bool x = true;
         HP -= damage;
-        Debug.Log(HP);
-        if (HP <= 0 && x)
+        
+        if (HP <= 0f && x)
         {
             Death();
             x = false;
@@ -152,6 +172,7 @@ public class RunnerCreature : Zombie_Base
 
     public override void Death()
     {
+        base.Death();
         StartCoroutine(DeathCoroutine());
 
     }
@@ -176,6 +197,7 @@ public class RunnerCreature : Zombie_Base
     public override void SpeedMultiplier(float multiplier)
     {
         speed += multiplier;
+        path.maxSpeed = this.speed;
     }
 
     /*public override ZombieBase ZombieFactory()
@@ -198,9 +220,26 @@ public class ZombieManager : MonoBehaviour
         {
             currentZombie = gameObject.AddComponent<RunnerCreature>();
         }
+        currentZombie.path = gameObject.GetComponent<AIPath>();
     }
 
-    public void ZombTakeDamage (int dmg)
+    private void Start()
+    {
+       
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            Debug.Log("dasdadadadsada");
+            var d = collision.gameObject.GetComponent<BulletBase>().damage;
+            ZombTakeDamage(d);
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    public void ZombTakeDamage (float dmg)
     {
         currentZombie.TakeDamage(dmg);
     }
@@ -213,5 +252,6 @@ public class ZombieManager : MonoBehaviour
     public void ZombAddSpeed(float m)
     {
         currentZombie.SpeedMultiplier(m);
+        
     }
 }

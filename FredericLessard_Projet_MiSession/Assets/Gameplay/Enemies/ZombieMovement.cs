@@ -31,8 +31,8 @@ public class ZombieMovement : MonoBehaviour
     {
         if (!dead)
         {
-            Vector2 direction = playerTransform.position - transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+           Vector2 direction = playerTransform.position - transform.position;
+           // transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
 
             if (direction.x < 0)
             {

@@ -10,14 +10,17 @@ TagManager:
   - Spawner
   - Zombie_Runner
   - GameManager
+  - EnemyCollider
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EnemyCollider
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 

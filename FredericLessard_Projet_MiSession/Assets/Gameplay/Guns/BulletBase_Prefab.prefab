@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 82360399978996418}
   m_Layer: 0
   m_Name: BulletBase_Prefab
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3c3a9bc4f4a664ea2a744ea56eb39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   damage: 0
+  bulletSO: {fileID: 11400000, guid: 4872dd4bac240f54f953776b559b5c51, type: 2}

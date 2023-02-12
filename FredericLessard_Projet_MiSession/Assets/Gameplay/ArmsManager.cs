@@ -6,14 +6,20 @@ public class ArmsManager : MonoBehaviour
 {
     public GameObject backHand;
     public GameObject currentGun;
+    public GameObject starterGun;
 
-
+    private ObjectPool_Bullets bulletPool;
 
     private void Start()
     {
         Resources.Load<Sprite>("2");
-        currentGun = backHand.transform.GetChild(0).gameObject;
-        
+        var gunInstance = Instantiate(starterGun);
+        currentGun = gunInstance;
+        gunInstance.transform.SetParent(backHand.transform);
+        currentGun.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        currentGun.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -0.03f);
+        bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
+        currentGun.GetComponent<GunBase>().activeGun = true;
     }
     void Update()
     {
@@ -31,9 +37,19 @@ public class ArmsManager : MonoBehaviour
          
     }
 
-    private void ChangeGun(GameObject newGun)
+    public void ChangeGun(GameObject newGun)
     {
+
+        backHand.transform.DetachChildren();
+        Destroy(currentGun);
         currentGun = newGun;
+        currentGun.GetComponent<GunBase>().activeGun = true;
+        
+        newGun.transform.SetParent(backHand.transform);
+        currentGun.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        bulletPool.BulletChange(currentGun.GetComponent<GunBase>().bulletType.gameObject);
+        
+        currentGun.GetComponent<GunBase>().bInst = bulletPool.bulletList[0]; //fix
     }
 
 

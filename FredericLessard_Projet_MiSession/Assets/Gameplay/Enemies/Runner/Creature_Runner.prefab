@@ -60,6 +60,10 @@ PrefabInstance:
       value: Creature_Runner
       objectReference: {fileID: 0}
     - target: {fileID: 1060718672099750433, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060718672099750433, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
       propertyPath: m_TagString
       value: Zombie_Runner
       objectReference: {fileID: 0}
@@ -67,17 +71,42 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ba125c6b8e2b2f546afe886361a8e250, type: 2}
-    - target: {fileID: 1779925499603605483, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Size.x
+      value: 0.25976807
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6089158
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.038245052
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.049399853
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.52
       objectReference: {fileID: 0}
-    - target: {fileID: 1779925499603605483, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+    - target: {fileID: 2740037395697570542, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295406474776924555, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Radius
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689239368882363416, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9094911061268043953, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 176874629, guid: aff4847c0a5ef1c48bd82b8175078d7b, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2716121559611445048, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dd708d89bfac18444a3da685d721c2e8, type: 3}

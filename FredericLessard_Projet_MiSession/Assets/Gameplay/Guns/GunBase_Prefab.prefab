@@ -42,9 +42,10 @@ GameObject:
   - component: {fileID: 4551141680363754541}
   - component: {fileID: 4551141680363754543}
   - component: {fileID: 4551141680363754540}
+  - component: {fileID: 1474274637749529674}
   m_Layer: 0
   m_Name: GunBase_Prefab
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,5 +130,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227364716dc422a41b3013c97eb84096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPosX: -0.04
-  rightPosX: 0.04
+  bulletType: {fileID: 0}
+  gunPos: {x: 0, y: 0}
+  muzzLeftPos: {x: 0, y: 0, z: 0}
+  muzzRightPos: {x: 0, y: 0, z: 0}
+  armsManager: {fileID: 0}
+  activeGun: 0
+--- !u!58 &1474274637749529674
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551141680363754538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.060000014

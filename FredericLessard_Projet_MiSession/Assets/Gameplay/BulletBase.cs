@@ -5,7 +5,11 @@ using UnityEngine;
 public class BulletBase : MonoBehaviour
 {
      private float speed;
-     private float damage;
+     public float damage;
+    public float fireSpeed;
+    public int magSize;
+    public int storedAmmo;
+    public string gunName;
 
     private ObjectPool_Bullets bulletPool;
     private SpriteRenderer spriteRenderer;
@@ -17,8 +21,13 @@ public class BulletBase : MonoBehaviour
         bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = bulletSO.sprite;
+        
         this.damage = bulletSO.damage;
         this.speed = bulletSO.speed;
+        this.fireSpeed = bulletSO.fireSpeed;
+        this.magSize = bulletSO.magSize;
+        this.storedAmmo = bulletSO.storedAmmo;
+        this.gunName = bulletSO.gunName;
         
     }
 
@@ -26,18 +35,20 @@ public class BulletBase : MonoBehaviour
     {
         StartCoroutine(VisibilityDisable());
     }
+  
 
-    private void OnCollisionEnter2D(Collision2D collision)
+   private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool x = true; 
-        if (collision.gameObject.tag.Contains("Zombie") && x)
+       // bool x = true; 
+      //  if (collision.gameObject.tag.Contains("Zombie") && x)
         {
-            collision.gameObject.GetComponent<ZombieManager>().ZombTakeDamage(10);
-            x = false;
+           // collision.gameObject.GetComponent<ZombieManager>().ZombTakeDamage(damage);
+            //x = false;
             
         }
-        gameObject.SetActive(false);
-    }
+        if (!collision.gameObject.tag.Contains("Gun"))
+            gameObject.SetActive(false);
+    } 
 
 
     IEnumerator VisibilityDisable()

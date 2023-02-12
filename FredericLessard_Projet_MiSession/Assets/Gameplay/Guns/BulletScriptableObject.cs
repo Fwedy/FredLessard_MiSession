@@ -8,8 +8,9 @@ public class BulletScriptableObject : ScriptableObject
     public float speed;
     public float damage;
     public float fireSpeed;
-    public float magSize;
-    public float storedAmmo;
+    public int magSize;
+    public int storedAmmo;
+    public string gunName;
 
     public Sprite sprite;
   
