@@ -12,7 +12,7 @@ public abstract class Zombie_Base : MonoBehaviour
     protected GameManager gameManager;
     public AIPath path;
     protected ZombieMovement zombMovement = new ZombieMovement();
-
+    protected float tempPrevHealth;
     public float GetSpeed()
     {
         return speed;
@@ -38,6 +38,11 @@ public abstract class Zombie_Base : MonoBehaviour
 
     public virtual void SpeedMultiplier(float multiplier) { }
 
+    public virtual void SetTempHealth(float hp) { }
+
+    public virtual void ReturnNormalHealth() {
+        HP = tempPrevHealth;
+    }
 
     //public abstract ZombieEnemy_Base ZombieFactory();
 
@@ -51,7 +56,7 @@ public class ZombieCrawler : Zombie_Base
         HP = 30;
         maxHP = 30;
         speed = 1f;
-       
+        tempPrevHealth = 0;
     }
 
     private void Awake()
@@ -97,7 +102,7 @@ public class ZombieCrawler : Zombie_Base
     }
     IEnumerator DeathCoroutine()
     {
-        gameManager.EnemyDied();
+        gameManager.EnemyDied(gameObject);
         rb.velocity = new Vector2(0, 0);
         var animator = GetComponent<Animator>();
         animator.SetBool("Dead", true);
@@ -119,6 +124,14 @@ public class ZombieCrawler : Zombie_Base
         path.maxSpeed = this.speed;
     }
 
+
+    public override void SetTempHealth(float hp)
+    {
+        tempPrevHealth = HP;
+        HP = hp;
+    }
+
+
     /*public override ZombieBase ZombieFactory()
     {
         return new Zombie_Crawler();
@@ -133,7 +146,7 @@ public class RunnerCreature : Zombie_Base
         HP = 50f;
         maxHP = 50;
         speed = 2f;
-        
+        tempPrevHealth = 0;
     }
 
     private void Awake()
@@ -178,7 +191,7 @@ public class RunnerCreature : Zombie_Base
     }
     IEnumerator DeathCoroutine()
     {
-        gameManager.EnemyDied();
+        gameManager.EnemyDied(gameObject);
         rb.velocity = new Vector2(0, 0);
         var animator = GetComponent<Animator>();
         animator.SetBool("Dead", true);
@@ -198,6 +211,12 @@ public class RunnerCreature : Zombie_Base
     {
         speed += multiplier;
         path.maxSpeed = this.speed;
+    }
+
+    public override void SetTempHealth(float hp)
+    {
+        tempPrevHealth = HP;
+        HP = hp;
     }
 
     /*public override ZombieBase ZombieFactory()
@@ -254,4 +273,15 @@ public class ZombieManager : MonoBehaviour
         currentZombie.SpeedMultiplier(m);
         
     }
+
+    public void NewTempHealth(float hp)
+    {
+        currentZombie.SetTempHealth(hp);
+    }
+
+    public void NormalHealth()
+    {
+        currentZombie.ReturnNormalHealth();
+    }
+        
 }

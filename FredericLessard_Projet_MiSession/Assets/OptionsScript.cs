@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class OptionsScript : MonoBehaviour
 {
     [SerializeField] private Slider VolumeSlider;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -51,5 +52,6 @@ public class OptionsScript : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
         
  }

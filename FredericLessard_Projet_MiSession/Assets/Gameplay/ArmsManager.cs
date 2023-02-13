@@ -49,7 +49,7 @@ public class ArmsManager : MonoBehaviour
         currentGun.transform.localRotation = Quaternion.Euler(0, 0, -90);
         bulletPool.BulletChange(currentGun.GetComponent<GunBase>().bulletType.gameObject);
         
-        currentGun.GetComponent<GunBase>().bInst = bulletPool.bulletList[0]; //fix
+        
     }
 
 

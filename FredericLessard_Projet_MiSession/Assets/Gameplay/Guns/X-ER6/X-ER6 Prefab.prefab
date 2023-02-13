@@ -16,6 +16,10 @@ PrefabInstance:
       value: X-ER6 Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
+      propertyPath: GunSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 33167939ccd6ff347ac10eb181de42ae, type: 2}
+    - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
       propertyPath: gunPos.x
       value: -0.061
       objectReference: {fileID: 0}

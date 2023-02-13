@@ -7,8 +7,9 @@ public class GunBase : MonoBehaviour
 
 
     public BulletBase bulletType;
+    [SerializeField] GunScriptableObject GunSO;
     private ObjectPool_Bullets bulletPool;
-    public GameObject bInst;
+   
 
     [SerializeField] private Vector2 gunPos;
 
@@ -24,6 +25,7 @@ public class GunBase : MonoBehaviour
     public bool activeGun = false;
 
     private bool canShoot = true;
+    private float fireSpeed; // Fix
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class GunBase : MonoBehaviour
         bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
         bulletType = bulletType.GetComponent<BulletBase>();
         armsManager = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ArmsManager>();
+        this.fireSpeed = GunSO.fireFreq;
     }
 
     // Update is called once per frame
@@ -39,6 +42,7 @@ public class GunBase : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && activeGun && canShoot)
         {
+            canShoot = false;
             Shoot();
         }
 
@@ -67,9 +71,9 @@ public class GunBase : MonoBehaviour
 
     private void Shoot()
     {
-        
-            canShoot = false;
-            var newBullet = bulletPool.FindAvailableBullet();
+
+        StartCoroutine(ShootDelay());
+        var newBullet = bulletPool.FindAvailableBullet();
             newBullet.gameObject.SetActive(true);
             newBullet.transform.position = muzzle.transform.position;
             newBullet.transform.rotation = muzzle.transform.rotation;
@@ -77,14 +81,16 @@ public class GunBase : MonoBehaviour
 
             Rigidbody2D rigidBody = newBullet.GetComponent<Rigidbody2D>();
             rigidBody.AddForce(gameObject.transform.right * bulletType.bulletSO.speed);
-            StartCoroutine(ShootDelay(bInst.GetComponent<BulletBase>().fireSpeed)); //fix need instance more rapidly
+
+       
         
         
     }
 
-    IEnumerator ShootDelay(float delay) {
-      //  float x = bulletType.fireSpeed;
-        yield return new WaitForSeconds(delay);
+    IEnumerator ShootDelay() {
+        
+
+        yield return new WaitForSeconds(fireSpeed);
         canShoot = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -102,5 +108,6 @@ public class GunBase : MonoBehaviour
     private void PickUpGun()
     {
         armsManager.ChangeGun(gameObject);
+        
     }
 }

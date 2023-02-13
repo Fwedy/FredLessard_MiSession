@@ -24,6 +24,10 @@ PrefabInstance:
       value: Gun1_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
+      propertyPath: GunSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b8b15dd5d7d9fb43ad9dfcbbff6a09a, type: 2}
+    - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
       propertyPath: gunPos.x
       value: -0.046
       objectReference: {fileID: 0}

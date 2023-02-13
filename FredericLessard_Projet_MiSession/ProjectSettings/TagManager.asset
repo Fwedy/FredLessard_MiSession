@@ -13,6 +13,8 @@ TagManager:
   - EnemyCollider
   - Gun
   - Bullet
+  - PowerUp
+  - PowerUp_Proxy
   layers:
   - Default
   - TransparentFX

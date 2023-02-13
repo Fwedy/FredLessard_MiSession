@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private int roundNumber = 0;
    
     private List<GameObject> spawners = new List<GameObject>();
-    private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
     public static GameManager Instance
     {
         get
@@ -69,9 +69,12 @@ public class GameManager : MonoBehaviour
         roundTXT.text = roundNumber.ToString();
     }
 
-    public void EnemyDied()
+    public void EnemyDied(GameObject enemy)
     {
         enemiesAlive -= 1;
+
+        if(enemies.Contains(enemy))
+            enemies.Remove(enemy);
 
         if (enemiesAlive <= 0)
         {

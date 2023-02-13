@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
     [SerializeField] private GameObject OptionsMenu;
-
+    [SerializeField] private LevelData levelData;
     public void GameplayScene() {
 
-        SceneManager.LoadScene("Gameplay_Scene");
+        SceneManager.LoadScene(levelData.sceneName);
     }
 
     public void Quit()

@@ -34,7 +34,7 @@ public class ObjectPool_Bullets : MonoBehaviour
             
                 
         }
-        return bulletList[0];
+        return bulletList[40];
     }
 
     public void BulletChange(GameObject newBullet)
@@ -55,5 +55,7 @@ public class ObjectPool_Bullets : MonoBehaviour
 
         bulletBase = newBullet;
     }
+
+ 
 
    }

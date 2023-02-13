@@ -45,6 +45,8 @@ public class ZombieSpawner : MonoBehaviour
 
     public float hpMultiplier;
     public float speedMultiplier;
+    public bool instaKillActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +110,12 @@ public class ZombieSpawner : MonoBehaviour
             newZomb.GetComponent<ZombieManager>().ZombAddSpeed(speedMultiplier);
 
             gameManager.enemiesLeftToSpawn -= 1;
+            gameManager.enemies.Add(newZomb);
+
+            if (instaKillActive)
+            {
+                newZomb.GetComponent<ZombieManager>().NewTempHealth(1);
+            }
 
             yield return new WaitForSeconds(4);
 
