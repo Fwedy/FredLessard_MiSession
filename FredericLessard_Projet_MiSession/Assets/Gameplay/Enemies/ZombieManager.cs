@@ -227,7 +227,7 @@ public class RunnerCreature : Zombie_Base
 
 public class ZombieManager : MonoBehaviour
 {
-    
+    private GameManager gameManager;
     private Zombie_Base currentZombie;
     // Start is called before the first frame update
     void Awake()
@@ -240,6 +240,7 @@ public class ZombieManager : MonoBehaviour
             currentZombie = gameObject.AddComponent<RunnerCreature>();
         }
         currentZombie.path = gameObject.GetComponent<AIPath>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -251,10 +252,11 @@ public class ZombieManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            Debug.Log("dasdadadadsada");
+            
             var d = collision.gameObject.GetComponent<BulletBase>().damage;
             ZombTakeDamage(d);
             collision.gameObject.SetActive(false);
+            gameManager.ModifyPoints(10);
         }
     }
 

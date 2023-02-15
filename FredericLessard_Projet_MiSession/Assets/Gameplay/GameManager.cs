@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
    
     private List<GameObject> spawners = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
+
+    public int playerPoints = 0;
+    public bool doublePoits = false;
+    [SerializeField] private GameObject newPointsTXT;
+    [SerializeField] private GameObject UIPointsContainer;
+    [SerializeField] private TextMeshProUGUI pointsTXT;
     public static GameManager Instance
     {
         get
@@ -73,6 +79,8 @@ public class GameManager : MonoBehaviour
     {
         enemiesAlive -= 1;
 
+        ModifyPoints(60);
+
         if(enemies.Contains(enemy))
             enemies.Remove(enemy);
 
@@ -99,6 +107,20 @@ public class GameManager : MonoBehaviour
             spawner.GetComponent<ZombieSpawner>().speedMultiplier += 0.10f;
         }
     }
+
+    public void ModifyPoints(int p)
+    {
+        if (doublePoits)
+            p *= 2;
+
+        playerPoints += p;
+        var pts = Instantiate(newPointsTXT, UIPointsContainer.transform.GetChild(0).GetComponent<RectTransform>().position, Quaternion.identity);
+        pts.GetComponent<TextMeshProUGUI>().text = "+" + p;
+        pts.transform.SetParent(UIPointsContainer.transform);
+        pointsTXT.text = playerPoints.ToString();
+    }
+
+    
 
     
     }

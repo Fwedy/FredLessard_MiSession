@@ -62,6 +62,7 @@ public class EditorMenu : MonoBehaviour
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(levelDataGuid);
             sceneAssets.Add(AssetDatabase.LoadAssetAtPath<LevelData>(assetPath));
+
         }
         return sceneAssets;
 
@@ -74,11 +75,13 @@ public class EditorMenu : MonoBehaviour
         {
             if (levelAsset.sceneAsset.name != levelAsset.sceneName)
             {
+                var oldName = levelAsset.sceneName;
                 levelAsset.sceneName = levelAsset.sceneAsset.name;
 
                 //Aide pour changer le nom du SO (faire nouveau SO completement?)
-                levelAsset.name.Replace(levelAsset.name, levelAsset.sceneName); 
-                
+                levelAsset.name.Replace(levelAsset.name, levelAsset.sceneName);
+
+                AssetDatabase.RenameAsset(("Assets/ScriptableObjects/" + oldName), levelAsset.name);
             }
         }
     }
