@@ -5,6 +5,7 @@ using TMPro;
 
 
 
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject OptionsMenu;
@@ -14,13 +15,16 @@ public class GameManager : MonoBehaviour
 
     public int enemiesLeftToSpawn = 10;
     private int enemiesAlive = 10;
-    private int roundNumber = 0;
+    [SerializeField] private int roundNumber =  1;
    
     private List<GameObject> spawners = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
 
     public int playerPoints = 0;
     public bool doublePoits = false;
+
+    [SerializeField] private PowerUp_Proxy powerUpProxy;
+
     [SerializeField] private GameObject newPointsTXT;
     [SerializeField] private GameObject UIPointsContainer;
     [SerializeField] private TextMeshProUGUI pointsTXT;
@@ -81,12 +85,24 @@ public class GameManager : MonoBehaviour
 
         ModifyPoints(60);
 
+        int x = Random.Range(0,  1);
+        if(x < 1)
+        {
+            powerUpProxy.SpawnPowerUp(enemy);
+        }
+
         if(enemies.Contains(enemy))
             enemies.Remove(enemy);
 
         if (enemiesAlive <= 0)
         {
             StartCoroutine(RoundChange());
+            
+            int a = Random.Range(0, Mathf.Clamp(100-roundNumber, 0, 100));
+            if (a < 1)
+            {
+                powerUpProxy.SpawnMaxAmmo(enemy);
+            }
         }
     }
 
@@ -120,9 +136,14 @@ public class GameManager : MonoBehaviour
         pointsTXT.text = playerPoints.ToString();
     }
 
-    
-
-    
+    public void RefreshEnemyPath(GameObject obj) { 
+        foreach (GameObject enemy in enemies)
+        {
+           // enemy.GetComponent<AstarPath>().
+        }
     }
-    
+
+
+}
+
 

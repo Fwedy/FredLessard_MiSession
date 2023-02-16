@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BoxScript : MonoBehaviour
 {
+   private GameManager gameManager;
+
     private GameObject gunRoller;
     [SerializeField] private int rollLenght;
 
@@ -12,9 +14,13 @@ public class BoxScript : MonoBehaviour
 
     private bool playerInRange = false;
     private bool active = true;
+
+    [SerializeField] private int boxCost;
+    
         // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         gunRoller = gameObject.transform.GetChild(0).gameObject;
         gunRoller.SetActive(false);
         foreach (GameObject gun in guns)
@@ -55,6 +61,8 @@ public class BoxScript : MonoBehaviour
         }
 
         GenerateLastGun(x);
+        yield return new WaitForSeconds(1.5f);
+        active = true;
     }
 
     private void GenerateLastGun(int gunPos)
@@ -68,8 +76,12 @@ public class BoxScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && playerInRange && active)
         {
-            StartCoroutine(rollSprites());
-            active = false;
+            if (gameManager.playerPoints >= 950)
+            {
+                gameManager.ModifyPoints(-boxCost);
+                StartCoroutine(rollSprites());
+                active = false;
+            }
         }
     }
 }

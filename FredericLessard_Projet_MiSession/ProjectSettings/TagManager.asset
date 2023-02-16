@@ -15,6 +15,7 @@ TagManager:
   - Bullet
   - PowerUp
   - PowerUp_Proxy
+  - AmmoTXT
   layers:
   - Default
   - TransparentFX

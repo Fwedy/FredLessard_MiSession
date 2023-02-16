@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736b982fe74ab4348abcdc1678c005c6, type: 3}
   m_Name: SledgeHMR - SO
   m_EditorClassIdentifier: 
-  fireFreq: 0.3
-  magSize: 0
-  storedAmmo: 0
+  fireFreq: 0.25
+  magSize: 12
+  storedAmmo: 96

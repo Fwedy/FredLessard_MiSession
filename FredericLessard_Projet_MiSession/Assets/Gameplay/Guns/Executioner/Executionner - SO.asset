@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Executionner - SO
   m_EditorClassIdentifier: 
   fireFreq: 0.12
-  magSize: 0
-  storedAmmo: 0
+  magSize: 6
+  storedAmmo: 120

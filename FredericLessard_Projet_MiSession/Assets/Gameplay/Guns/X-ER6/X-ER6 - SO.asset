@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: X-ER6 - SO
   m_EditorClassIdentifier: 
   fireFreq: 0.21
-  magSize: 0
-  storedAmmo: 0
+  magSize: 8
+  storedAmmo: 88

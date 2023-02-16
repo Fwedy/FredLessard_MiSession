@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstaKillPowerUp : MonoBehaviour
+public class MaxAmmoScript : MonoBehaviour
 {
     private PowerUp_Proxy proxy;
     private bool x = true;
@@ -16,11 +16,9 @@ public class InstaKillPowerUp : MonoBehaviour
         if (x && collision.gameObject.tag == "Player")
         {
             x = false;
-            proxy.InstaKillActivate();
+            proxy.MaxAmmoActivate();
             Destroy(gameObject);
 
         }
     }
-
-
 }

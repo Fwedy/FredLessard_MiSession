@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GunBase : MonoBehaviour
 {
@@ -25,7 +26,13 @@ public class GunBase : MonoBehaviour
     public bool activeGun = false;
 
     private bool canShoot = true;
-    private float fireSpeed; // Fix
+    
+    private float fireSpeed;
+
+    [SerializeField] TextMeshProUGUI ammoTXT;
+    private float ammoInMag;
+    private float ammoInStash;
+    private bool reloading = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +41,13 @@ public class GunBase : MonoBehaviour
         bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
         bulletType = bulletType.GetComponent<BulletBase>();
         armsManager = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ArmsManager>();
+        ammoTXT = GameObject.FindGameObjectWithTag("AmmoTXT").GetComponent<TextMeshProUGUI>();
+        
         this.fireSpeed = GunSO.fireFreq;
+
+        this.ammoInMag = GunSO.magSize;
+        this.ammoInStash = GunSO.storedAmmo;
+        ammoTXT.text = ammoInMag + "/" + ammoInStash;
     }
 
     // Update is called once per frame
@@ -82,8 +95,16 @@ public class GunBase : MonoBehaviour
             Rigidbody2D rigidBody = newBullet.GetComponent<Rigidbody2D>();
             rigidBody.AddForce(gameObject.transform.right * bulletType.bulletSO.speed);
 
-       
-        
+         ammoInMag -= 1;
+        ammoTXT.text = ammoInMag + "/" + ammoInStash;
+        if (ammoInMag <= 0)
+        {
+            reloading = true;
+            canShoot = false;
+            if (ammoInStash > 0)
+                StartCoroutine(Reload());
+            
+        }       
         
     }
 
@@ -91,8 +112,37 @@ public class GunBase : MonoBehaviour
         
 
         yield return new WaitForSeconds(fireSpeed);
-        canShoot = true;
+
+        if (!reloading)
+            canShoot = true;
     }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(3);
+        if (ammoInStash < ammoInMag)
+        {
+            ammoInMag = ammoInStash;
+            ammoInStash = 0;
+        }
+        else {
+            ammoInMag = GunSO.magSize;
+            ammoInStash -= ammoInMag;
+        }
+        ammoTXT.text = ammoInMag + "/" + ammoInStash;
+        canShoot = true;
+        reloading = false;
+    }
+
+    public void MaxAmmo()
+    {
+        ammoInMag = GunSO.magSize;
+        ammoInStash = GunSO.storedAmmo;
+        ammoTXT.text = ammoInMag + "/" + ammoInStash;
+        canShoot = true;
+        reloading = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
