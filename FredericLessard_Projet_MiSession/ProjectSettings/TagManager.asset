@@ -16,6 +16,8 @@ TagManager:
   - PowerUp
   - PowerUp_Proxy
   - AmmoTXT
+  - PerkProxy
+  - InfoTXT
   layers:
   - Default
   - TransparentFX

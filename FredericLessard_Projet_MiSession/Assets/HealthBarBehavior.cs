@@ -6,18 +6,39 @@ using UnityEngine.UI;
 public class HealthBarBehavior : MonoBehaviour
 {
   [SerializeField]  private Image fillImage;
+    [SerializeField] private Image container;
 
+    private float x;
 
     private void Start()
     {
-       // fillImage = gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+        fillImage.color = new Color32(255, 255, 255, 0);
+        container.color = new Color32(255, 255, 255, 0);
     }
-    public void HealthChange(float newHealth) 
+    public void HealthChange(float newHealth, float maxHealth) 
     {
-        //float x = ((1 / 4) * newHealth);
-        fillImage.fillAmount = ((1f / 4f) * newHealth);
+         x = ((1f / maxHealth) * newHealth);
+        fillImage.fillAmount = x;
         
-        
+        if (x >= 0.9f)
+        {
+            StartCoroutine(HideBarDelay());
+        }
+        else
+        {
+            fillImage.color = new Color32(255, 255, 255, 255);
+            container.color = new Color32(255, 255, 255, 255);
+        }
+    }
+
+    IEnumerator HideBarDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (x >= 0.9f)
+        {
+            fillImage.color = new Color32(255, 255, 255, 0);
+            container.color = new Color32(255, 255, 255, 0);
+        }
     }
 
 }

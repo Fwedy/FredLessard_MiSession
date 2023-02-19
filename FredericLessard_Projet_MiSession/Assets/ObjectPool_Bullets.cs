@@ -10,6 +10,7 @@ public class ObjectPool_Bullets : MonoBehaviour
     
     [SerializeField] GameObject bulletBase;
 
+    public bool damageBoostPerk = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,13 @@ public class ObjectPool_Bullets : MonoBehaviour
         {
             if (!bulletList[i].gameObject.activeInHierarchy)
             {
+                bulletList[i].SetActive(true);
+
+                if (damageBoostPerk && bulletList[i].GetComponent<BulletBase>().damage == bulletList[i].GetComponent<BulletBase>().bulletSO.damage)
+                {
+                    bulletList[i].GetComponent<BulletBase>().damage = bulletList[i].GetComponent<BulletBase>().bulletSO.damage * 2;
+                }
+
                 return bulletList[i];
                 
             }
@@ -50,12 +58,23 @@ public class ObjectPool_Bullets : MonoBehaviour
            var temp = Instantiate(newBullet);
             newBullet.gameObject.SetActive(false);
             bulletList.Add(temp);
-
+            
+            if (damageBoostPerk)
+            {
+                temp.GetComponent<BulletBase>().damage *= 2;
+            }
         }
 
         bulletBase = newBullet;
     }
 
- 
+    public void ActivateDamagePerk()
+    {
+        damageBoostPerk = true;
+        foreach (GameObject bullet in bulletList)
+        {
+            bullet.GetComponent<BulletBase>().damage *= 2;
+        }
+    } 
 
    }

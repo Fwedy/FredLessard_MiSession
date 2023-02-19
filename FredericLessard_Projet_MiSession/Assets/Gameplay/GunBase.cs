@@ -5,7 +5,7 @@ using TMPro;
 
 public class GunBase : MonoBehaviour
 {
-
+    private GameManager gameManager;
 
     public BulletBase bulletType;
     [SerializeField] GunScriptableObject GunSO;
@@ -28,6 +28,7 @@ public class GunBase : MonoBehaviour
     private bool canShoot = true;
     
     private float fireSpeed;
+    public string gunName;
 
     [SerializeField] TextMeshProUGUI ammoTXT;
     private float ammoInMag;
@@ -42,9 +43,10 @@ public class GunBase : MonoBehaviour
         bulletType = bulletType.GetComponent<BulletBase>();
         armsManager = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ArmsManager>();
         ammoTXT = GameObject.FindGameObjectWithTag("AmmoTXT").GetComponent<TextMeshProUGUI>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         
         this.fireSpeed = GunSO.fireFreq;
-
+        this.gunName = GunSO.gunName;
         this.ammoInMag = GunSO.magSize;
         this.ammoInStash = GunSO.storedAmmo;
         ammoTXT.text = ammoInMag + "/" + ammoInStash;
@@ -53,7 +55,7 @@ public class GunBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && activeGun && canShoot)
+        if (Input.GetMouseButtonDown(0) && activeGun && canShoot && !armsManager.paused)
         {
             canShoot = false;
             Shoot();
@@ -87,7 +89,7 @@ public class GunBase : MonoBehaviour
 
         StartCoroutine(ShootDelay());
         var newBullet = bulletPool.FindAvailableBullet();
-            newBullet.gameObject.SetActive(true);
+            
             newBullet.transform.position = muzzle.transform.position;
             newBullet.transform.rotation = muzzle.transform.rotation;
 
@@ -119,7 +121,7 @@ public class GunBase : MonoBehaviour
 
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(gameManager.reloadSpeed);
         if (ammoInStash < ammoInMag)
         {
             ammoInMag = ammoInStash;

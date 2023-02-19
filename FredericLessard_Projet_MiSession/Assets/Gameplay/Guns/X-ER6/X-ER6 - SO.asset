@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736b982fe74ab4348abcdc1678c005c6, type: 3}
   m_Name: X-ER6 - SO
   m_EditorClassIdentifier: 
+  gunName: X-ER6
   fireFreq: 0.21
   magSize: 8
   storedAmmo: 88

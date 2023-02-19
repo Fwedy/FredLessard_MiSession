@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public int enemiesLeftToSpawn = 10;
     private int enemiesAlive = 10;
-    [SerializeField] private int roundNumber =  1;
+    public int roundNumber =  1;
    
     private List<GameObject> spawners = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
@@ -24,13 +24,17 @@ public class GameManager : MonoBehaviour
     public int playerPoints = 0;
     public bool doublePoits = false;
 
-    private float playerMaxHP = 4f;
+    public float reloadSpeed = 3f;
+
+    private GameObject player;
+    public float playerMaxHP = 4f;
     [SerializeField]public float playerHP = 4f;
     [SerializeField]private float regenerationRate;
     private float lastDamageTime;
     private float currentRegenerationAmount;
     private bool takingDamage = false;
     [SerializeField] private Image healthBar;
+    private bool revivePerk = true;
 
     [SerializeField] private PowerUp_Proxy powerUpProxy;
 
@@ -64,6 +68,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         spawners.AddRange(GameObject.FindGameObjectsWithTag("Spawner"));
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(RoundChange());
     }
 
@@ -83,7 +88,7 @@ public class GameManager : MonoBehaviour
             takingDamage = false;
         }
 
-        if (!takingDamage && playerHP < playerMaxHP)
+        if (!takingDamage && playerHP < playerMaxHP && playerHP > 0)
         {
             currentRegenerationAmount += regenerationRate * Time.deltaTime;
 
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour
             {
                 playerHP += regeneratedHealth;
                 currentRegenerationAmount -= regeneratedHealth;
-                healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP);
+                healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP, playerMaxHP);
             }
         }
 
@@ -174,10 +179,23 @@ public class GameManager : MonoBehaviour
             playerHP -= 0.5f;
             takingDamage = true;
             lastDamageTime = Time.time;
-            healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP);
+            healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP, playerMaxHP);
+
+            StartCoroutine(HurtAnim());
+
+            if (playerHP <= 0)
+            {
+                player.GetComponent<PlayerMovement>().PlayerDead();
+            }
         }
     }
 
+    IEnumerator HurtAnim()
+    {
+        player.GetComponent<Animator>().SetBool("Hurt", true);
+        yield return new WaitForSeconds(0.25f);
+        player.GetComponent<Animator>().SetBool("Hurt", false);
+    }
 
 }
 

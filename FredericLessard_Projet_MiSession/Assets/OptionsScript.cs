@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class OptionsScript : MonoBehaviour
 {
     [SerializeField] private Slider VolumeSlider;
-    
+    [SerializeField] private TextMeshProUGUI roundTXT;
+    [SerializeField] private LevelData mainMenu;
+
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerMovement playerMovement;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +34,7 @@ public class OptionsScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameObject.activeInHierarchy)
-                CloseOptions();
+                UnPause();
         }
     }
 
@@ -47,11 +53,32 @@ public class OptionsScript : MonoBehaviour
     {
         PlayerPrefs.SetFloat("mainVolume", VolumeSlider.value);
     }
-    private void CloseOptions()
+    
+    private void UnPause()
     {
+        roundTXT.text = gameManager.roundNumber.ToString();
+        Time.timeScale = 1;
+        playerMovement.PauseGame();
 
         gameObject.SetActive(false);
     }
+   
 
-        
- }
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
+        roundTXT.text = "Round: " + gameManager.roundNumber;
+        playerMovement.PauseGame();
+    }
+
+    public void OnResumeBTNClick()
+    {
+        UnPause();
+    }
+
+    public void OnMainMenuBTNClick()
+    {
+        SceneManager.LoadScene(mainMenu.sceneName);
+    }
+
+}

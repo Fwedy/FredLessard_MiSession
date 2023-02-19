@@ -10,6 +10,7 @@ public class ArmsManager : MonoBehaviour
 
     private ObjectPool_Bullets bulletPool;
 
+    public bool paused = false;
     private void Start()
     {
         Resources.Load<Sprite>("2");
@@ -23,18 +24,20 @@ public class ArmsManager : MonoBehaviour
     }
     void Update()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        if (!paused)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector2 direction = new Vector2(
-            mousePosition.x - backHand.transform.position.x,
-            mousePosition.y - backHand.transform.position.y
-        );
+            Vector2 direction = new Vector2(
+                mousePosition.x - backHand.transform.position.x,
+                mousePosition.y - backHand.transform.position.y
+            );
 
-        float angle = Vector2.SignedAngle(Vector2.right, direction);
-        backHand.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+            float angle = Vector2.SignedAngle(Vector2.right, direction);
+            backHand.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
-         
+        }
     }
 
     public void ChangeGun(GameObject newGun)

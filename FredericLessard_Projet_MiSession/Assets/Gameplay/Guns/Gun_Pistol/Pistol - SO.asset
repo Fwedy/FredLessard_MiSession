@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736b982fe74ab4348abcdc1678c005c6, type: 3}
   m_Name: Pistol - SO
   m_EditorClassIdentifier: 
+  gunName: Glock
   fireFreq: 0.07
   magSize: 9
   storedAmmo: 90

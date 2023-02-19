@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736b982fe74ab4348abcdc1678c005c6, type: 3}
   m_Name: Executionner - SO
   m_EditorClassIdentifier: 
+  gunName: Executioner
   fireFreq: 0.12
   magSize: 6
   storedAmmo: 120
