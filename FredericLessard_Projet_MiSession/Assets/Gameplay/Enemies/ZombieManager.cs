@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+
 public abstract class Zombie_Base : MonoBehaviour
 {
     protected float HP;
@@ -229,6 +230,8 @@ public class ZombieManager : MonoBehaviour
 {
     private GameManager gameManager;
     private Zombie_Base currentZombie;
+
+    private bool canHit = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -257,6 +260,33 @@ public class ZombieManager : MonoBehaviour
             ZombTakeDamage(d);
             collision.gameObject.SetActive(false);
             gameManager.ModifyPoints(10);
+        }
+        if(collision.gameObject.tag == "Player" && !canHit)
+        {
+            canHit = true;
+            StartCoroutine(HitRoutine());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && canHit)
+        {
+            canHit = false;
+        }
+    }
+
+    IEnumerator HitRoutine()
+    {
+        float wait = 1.5f;
+        while (canHit)
+        {
+            yield return new WaitForSeconds(wait);
+            if (canHit)
+            {
+                gameManager.TakeDamage();
+            }
+            wait = 1;
         }
     }
 

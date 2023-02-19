@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -22,6 +23,14 @@ public class GameManager : MonoBehaviour
 
     public int playerPoints = 0;
     public bool doublePoits = false;
+
+    private float playerMaxHP = 4f;
+    [SerializeField]public float playerHP = 4f;
+    [SerializeField]private float regenerationRate;
+    private float lastDamageTime;
+    private float currentRegenerationAmount;
+    private bool takingDamage = false;
+    [SerializeField] private Image healthBar;
 
     [SerializeField] private PowerUp_Proxy powerUpProxy;
 
@@ -67,7 +76,27 @@ public class GameManager : MonoBehaviour
                 OptionsMenu.SetActive(true);
         }
 
-       
+        
+
+        if (Time.time > lastDamageTime + 5f)
+        {
+            takingDamage = false;
+        }
+
+        if (!takingDamage && playerHP < playerMaxHP)
+        {
+            currentRegenerationAmount += regenerationRate * Time.deltaTime;
+
+            int regeneratedHealth = Mathf.RoundToInt(currentRegenerationAmount);
+
+            if (regeneratedHealth > 0)
+            {
+                playerHP += regeneratedHealth;
+                currentRegenerationAmount -= regeneratedHealth;
+                healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP);
+            }
+        }
+
     }
 
     private void newRound()
@@ -85,7 +114,7 @@ public class GameManager : MonoBehaviour
 
         ModifyPoints(60);
 
-        int x = Random.Range(0,  1);
+        int x = Random.Range(0, 30);
         if(x < 1)
         {
             powerUpProxy.SpawnPowerUp(enemy);
@@ -136,10 +165,16 @@ public class GameManager : MonoBehaviour
         pointsTXT.text = playerPoints.ToString();
     }
 
-    public void RefreshEnemyPath(GameObject obj) { 
-        foreach (GameObject enemy in enemies)
+    
+
+    public void TakeDamage()
+    {
+        if (playerHP > 0)
         {
-           // enemy.GetComponent<AstarPath>().
+            playerHP -= 0.5f;
+            takingDamage = true;
+            lastDamageTime = Time.time;
+            healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP);
         }
     }
 

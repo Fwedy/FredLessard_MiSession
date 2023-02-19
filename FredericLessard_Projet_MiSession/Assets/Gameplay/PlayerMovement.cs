@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         
 
 
-        Debug.Log(currentSpeed);
+        
         animator.SetFloat("Speed", currentSpeed);
     }
 }
