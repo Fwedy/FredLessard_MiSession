@@ -18,6 +18,10 @@ TagManager:
   - AmmoTXT
   - PerkProxy
   - InfoTXT
+  - ship
+  - asteroid
+  - PowerUpFactory
+  - EnemyFactory
   layers:
   - Default
   - TransparentFX

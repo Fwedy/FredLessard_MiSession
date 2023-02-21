@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ArmsManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class ArmsManager : MonoBehaviour
     public GameObject currentGun;
     public GameObject starterGun;
 
-    private ObjectPool_Bullets bulletPool;
+    [Inject] private ObjectPool_Bullets bulletPool;
 
     public bool paused = false;
     private void Start()
@@ -19,7 +20,8 @@ public class ArmsManager : MonoBehaviour
         gunInstance.transform.SetParent(backHand.transform);
         currentGun.transform.localRotation = Quaternion.Euler(0, 0, -90);
         currentGun.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -0.03f);
-        bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
+        //bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
+        
         currentGun.GetComponent<GunBase>().activeGun = true;
     }
     void Update()

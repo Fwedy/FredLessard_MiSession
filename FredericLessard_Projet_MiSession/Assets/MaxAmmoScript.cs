@@ -9,6 +9,7 @@ public class MaxAmmoScript : MonoBehaviour
     void Start()
     {
         proxy = GameObject.FindGameObjectWithTag("PowerUp_Proxy").GetComponent<PowerUp_Proxy>();
+        Destroy(gameObject, 16);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

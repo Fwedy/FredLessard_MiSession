@@ -9,5 +9,6 @@ public class GunScriptableObject : ScriptableObject
     public float fireFreq;
     public int magSize;
     public int storedAmmo;
-
+    public bool automatic;
+    
 }

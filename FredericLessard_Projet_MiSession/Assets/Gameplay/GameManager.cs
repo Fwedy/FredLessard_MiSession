@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public float reloadSpeed = 3f;
 
+    
     private GameObject player;
     public float playerMaxHP = 4f;
     [SerializeField]public float playerHP = 4f;
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image healthBar;
     private bool revivePerk = true;
 
-    [SerializeField] private PowerUp_Proxy powerUpProxy;
+    [SerializeField] private PowerUpSpawner powerUpSpawner;
 
     [SerializeField] private GameObject newPointsTXT;
     [SerializeField] private GameObject UIPointsContainer;
@@ -122,7 +123,7 @@ public class GameManager : MonoBehaviour
         int x = Random.Range(0, 30);
         if(x < 1)
         {
-            powerUpProxy.SpawnPowerUp(enemy);
+            powerUpSpawner.SpawnPowerUp(enemy);
         }
 
         if(enemies.Contains(enemy))
@@ -135,7 +136,7 @@ public class GameManager : MonoBehaviour
             int a = Random.Range(0, Mathf.Clamp(100-roundNumber, 0, 100));
             if (a < 1)
             {
-                powerUpProxy.SpawnMaxAmmo(enemy);
+                powerUpSpawner.SpawnMaxAmmo(enemy);
             }
         }
     }
@@ -144,7 +145,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject spawner in spawners)
         {
-            spawner.GetComponent<ZombieSpawner>().active = false;
+            spawner.GetComponent<EnemySpawner_Prefab>().active = false;
         }
 
         yield return new WaitForSeconds(5);
@@ -152,9 +153,9 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject spawner in spawners)
         {
-            spawner.GetComponent<ZombieSpawner>().TurnOn();
-            spawner.GetComponent<ZombieSpawner>().hpMultiplier = roundNumber * 10;
-            spawner.GetComponent<ZombieSpawner>().speedMultiplier += 0.10f;
+            spawner.GetComponent<EnemySpawner_Prefab>().TurnOn();
+            spawner.GetComponent<EnemySpawner_Prefab>().hpMultiplier = roundNumber * 10;
+            spawner.GetComponent<EnemySpawner_Prefab>().speedMultiplier += 0.10f;
         }
     }
 

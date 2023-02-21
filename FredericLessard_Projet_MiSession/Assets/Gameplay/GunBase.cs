@@ -28,12 +28,17 @@ public class GunBase : MonoBehaviour
     private bool canShoot = true;
     
     private float fireSpeed;
+    private bool automatic;
+    private bool autoShooting = false;
+    private bool currentlyShooting = false;
     public string gunName;
 
     [SerializeField] TextMeshProUGUI ammoTXT;
     private float ammoInMag;
     private float ammoInStash;
     private bool reloading = false;
+
+    private AudioSource shootSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,21 +49,38 @@ public class GunBase : MonoBehaviour
         armsManager = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ArmsManager>();
         ammoTXT = GameObject.FindGameObjectWithTag("AmmoTXT").GetComponent<TextMeshProUGUI>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        
+        shootSFX = GetComponent<AudioSource>();
+
         this.fireSpeed = GunSO.fireFreq;
         this.gunName = GunSO.gunName;
         this.ammoInMag = GunSO.magSize;
         this.ammoInStash = GunSO.storedAmmo;
+        this.automatic = GunSO.automatic;
+
         ammoTXT.text = ammoInMag + "/" + ammoInStash;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && activeGun && canShoot && !armsManager.paused)
+        if (Input.GetMouseButtonDown(0) && activeGun && canShoot && !armsManager.paused && !automatic)
         {
             canShoot = false;
             Shoot();
+        }
+
+        if (Input.GetMouseButtonDown(0) && activeGun && canShoot && !armsManager.paused && automatic)
+        {
+            autoShooting = true;
+            canShoot = false;
+            StartCoroutine(AutoShoot());
+
+        }
+
+        if (Input.GetMouseButtonUp(0) && activeGun  && !armsManager.paused && automatic)
+        {
+            autoShooting = false;
+            
         }
 
         if (pickable && !activeGun && Input.GetKey(KeyCode.E))
@@ -82,7 +104,21 @@ public class GunBase : MonoBehaviour
         muzzle.transform.localPosition = muzzRightPos;
     }
 
-
+    IEnumerator AutoShoot()
+    {
+        if (!currentlyShooting)
+        {
+            currentlyShooting = true;
+            while (autoShooting)
+            {
+                Shoot();
+                yield return new WaitForSeconds(fireSpeed);
+            }
+            yield return new WaitForSeconds(0.1f);
+            canShoot = true;
+            currentlyShooting = false;
+        }
+    }
 
     private void Shoot()
     {
@@ -99,10 +135,15 @@ public class GunBase : MonoBehaviour
 
          ammoInMag -= 1;
         ammoTXT.text = ammoInMag + "/" + ammoInStash;
+
+        if (shootSFX != null)
+            shootSFX.Play();
+
         if (ammoInMag <= 0)
         {
             reloading = true;
             canShoot = false;
+            autoShooting = false;
             if (ammoInStash > 0)
                 StartCoroutine(Reload());
             

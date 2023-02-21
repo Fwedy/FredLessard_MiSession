@@ -15,6 +15,9 @@ public class BoxScript : MonoBehaviour
 
     private bool playerInRange = false;
     private bool active = true;
+    private bool rolling = false;
+    private bool gunPickedUp = false;
+    private GameObject gun;
 
     [SerializeField] private int boxCost;
 
@@ -60,7 +63,7 @@ public class BoxScript : MonoBehaviour
 
     IEnumerator rollSprites()
     {
-        int x = 0;
+        int prev = -1 ;
         gunRoller.SetActive(true);
 
         infoTXT.gameObject.SetActive(true);
@@ -69,23 +72,40 @@ public class BoxScript : MonoBehaviour
         for (int i = 0; i < rollLenght; i++)
         {
             var r = Random.Range(0, guns.Count);
+            while (r == prev)
+            {
+                r = Random.Range(0, guns.Count);
+            }
             gunRoller.GetComponent<SpriteRenderer>().sprite = guns[r].GetComponent<SpriteRenderer>().sprite;
             yield return new WaitForSeconds(0.3f);
-            if (i >= rollLenght)
-                x = i;
+            prev = r;
+               
         }
 
-        GenerateLastGun(x);
+        GenerateLastGun(Random.Range(0, guns.Count));
+        rolling = false;
         yield return new WaitForSeconds(1.5f);
-        active = true;
+        
+        
     }
 
     private void GenerateLastGun(int gunPos)
     {
-        var gun = Instantiate(guns[gunPos], new Vector3(gunRoller.transform.position.x,  gunRoller.transform.position.y, -0.9f ), Quaternion.identity);
+        gun = Instantiate(guns[gunPos], new Vector3(gunRoller.transform.position.x,  gunRoller.transform.position.y, -0.9f ), Quaternion.identity);
         gunRoller.SetActive(false);
         infoTXT.gameObject.SetActive(true);
         infoTXT.text = "Pick up your new " + gun.GetComponent<GunBase>().gunName;
+        StartCoroutine(DestroyGunDelay());
+    }
+
+    IEnumerator DestroyGunDelay()
+    {
+        yield return new WaitForSeconds(30);
+        if (gunPickedUp == false)
+        {
+            Destroy(gun);
+            active = true;
+        }
     }
 
     // Update is called once per frame
@@ -93,10 +113,12 @@ public class BoxScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && playerInRange && active)
         {
-            if (gameManager.playerPoints >= 950)
+            if (gameManager.playerPoints >= boxCost)
             {
                 gameManager.ModifyPoints(-boxCost);
                 StartCoroutine(rollSprites());
+                gunPickedUp = false;
+                rolling = true;
                 active = false;
                 infoTXT.gameObject.SetActive(true);
                 infoTXT.text = "Thank you for your purchase!";
@@ -106,6 +128,10 @@ public class BoxScript : MonoBehaviour
                 infoTXT.gameObject.SetActive(true);
                 infoTXT.text = "Too broke, sorry!";
             }
+        }else if(!active && !rolling && Input.GetKey(KeyCode.E))
+        {
+            gunPickedUp = true;
+            active = true;
         }
     }
 }
