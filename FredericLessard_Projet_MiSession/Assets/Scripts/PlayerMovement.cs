@@ -90,5 +90,21 @@ public class PlayerMovement : MonoBehaviour
         armsManager.paused = paused;
     }
 
+    public void ActivateSlowDown()
+    {
+        StartCoroutine(SlowDown());
+    }
+
+    IEnumerator SlowDown()
+    {
+        float x = walkSpeed;
+
+        walkSpeed = 2f;
+
+        yield return new WaitForSeconds(10);
+
+        walkSpeed = x;
+    }
+
    
 }
