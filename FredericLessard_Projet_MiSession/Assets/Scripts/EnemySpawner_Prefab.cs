@@ -13,6 +13,8 @@ public class EnemySpawner_Prefab : MonoBehaviour
     public float hpMultiplier;
     public float speedMultiplier;
     public bool instaKillActive = false;
+
+    public float spawnDelay = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,9 +48,10 @@ public class EnemySpawner_Prefab : MonoBehaviour
                 newEnemy.GetComponent<ZombieManager>().NewTempHealth(1);
             }
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(Mathf.Clamp(spawnDelay,0.125f, 4f));
 
-
+            if (spawnDelay > 0.125f)
+                spawnDelay -= 0.125f;
         }
 
     }

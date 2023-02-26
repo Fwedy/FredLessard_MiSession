@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3043401978864508705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.256, y: -1.723, z: 0.94}
+  m_LocalPosition: {x: 10.256, y: -1.723, z: 2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -189,7 +189,10 @@ MonoBehaviour:
   - {fileID: 2279542901103446723, guid: f990c18df40f5894b9fa678f9ba0333b, type: 3}
   - {fileID: 3123829956654454286, guid: 64d4578ef54495648998a5c1264fec9a, type: 3}
   - {fileID: 5679623342590385456, guid: 0e07213d5ab402d43bc477d38ebfa939, type: 3}
+  - {fileID: 2615215470874115256, guid: d26250e18f1847b4ba7e4b8c8863daa9, type: 3}
+  - {fileID: 8485647854457495271, guid: 35eba707a59b5204a91582a54ac935f1, type: 3}
   gunS: []
+  boxCost: 0
 --- !u!58 &3043401978864508702
 CircleCollider2D:
   m_ObjectHideFlags: 0

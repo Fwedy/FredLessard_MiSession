@@ -15,4 +15,5 @@ MonoBehaviour:
   gunName: Glock
   fireFreq: 0.07
   magSize: 9
-  storedAmmo: 90
+  storedAmmo: 180
+  automatic: 0

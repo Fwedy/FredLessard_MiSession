@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerHP > 0)
         {
-            playerHP -= 0.5f;
+            playerHP -= 1f;
             takingDamage = true;
             lastDamageTime = Time.time;
             healthBar.GetComponent<HealthBarBehavior>().HealthChange(playerHP, playerMaxHP);

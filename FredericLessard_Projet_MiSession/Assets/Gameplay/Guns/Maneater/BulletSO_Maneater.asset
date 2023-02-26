@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 35
   fireSpeed: 0.02
   magSize: 24
-  storedAmmo: 200
+  storedAmmo: 300
   gunName: 
   sprite: {fileID: 21300000, guid: 2e36a253410e4874da45b23e4ce75858, type: 3}
