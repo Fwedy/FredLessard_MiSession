@@ -17,12 +17,4 @@ public class SceneChanger : MonoBehaviour
         Application.Quit();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!OptionsMenu.activeInHierarchy)
-                OptionsMenu.SetActive(true);
-        }
-    }
 }

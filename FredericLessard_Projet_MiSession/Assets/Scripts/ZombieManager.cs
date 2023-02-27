@@ -278,7 +278,7 @@ public class ZombieManager : MonoBehaviour
 
     IEnumerator HitRoutine()
     {
-        float wait = 0.5f;
+        float wait = 0.25f;
         while (canHit)
         {
             yield return new WaitForSeconds(wait);

@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject newPointsTXT;
     [SerializeField] private GameObject UIPointsContainer;
     [SerializeField] private TextMeshProUGUI pointsTXT;
+
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TextMeshProUGUI gORoundsTXT;
     public static GameManager Instance
     {
         get
@@ -61,8 +64,6 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
-
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -187,8 +188,16 @@ public class GameManager : MonoBehaviour
             if (playerHP <= 0)
             {
                 player.GetComponent<PlayerMovement>().PlayerDead();
+                StartCoroutine(GameOverUI());
             }
         }
+    }
+
+    IEnumerator GameOverUI()
+    {
+        yield return new WaitForSeconds(3);
+        gameOverPanel.SetActive(true);
+        gORoundsTXT.text += roundNumber.ToString();
     }
 
     IEnumerator HurtAnim()

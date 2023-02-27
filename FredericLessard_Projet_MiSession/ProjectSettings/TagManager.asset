@@ -22,6 +22,7 @@ TagManager:
   - asteroid
   - PowerUpFactory
   - EnemyFactory
+  - GunBox
   layers:
   - Default
   - TransparentFX

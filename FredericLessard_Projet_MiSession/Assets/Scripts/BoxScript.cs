@@ -7,6 +7,9 @@ public class BoxScript : MonoBehaviour
 {
    private GameManager gameManager;
 
+    public BoxManager boxManager;
+    public bool enabled = false;
+
     private GameObject gunRoller;
     [SerializeField] private int rollLenght;
 
@@ -39,16 +42,21 @@ public class BoxScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && active)
+        if (enabled)
         {
-            Debug.Log("Testttt");
-            playerInRange = true;
-            infoTXT.gameObject.SetActive(true);
-            infoTXT.text = "Buy gun box for " + boxCost + " points.";
-        }else if (collision.gameObject.tag == "Player" && !active)
-        {
-            infoTXT.gameObject.SetActive(true);
-            infoTXT.text = "Gun box is unavailable, come back later.";
+
+            if (collision.gameObject.tag == "Player" && active)
+            {
+                Debug.Log("Testttt");
+                playerInRange = true;
+                infoTXT.gameObject.SetActive(true);
+                infoTXT.text = "Buy gun box for " + boxCost + " points.";
+            }
+            else if (collision.gameObject.tag == "Player" && !active)
+            {
+                infoTXT.gameObject.SetActive(true);
+                infoTXT.text = "Gun box is unavailable, come back later.";
+            }
         }
     }
 
@@ -105,6 +113,11 @@ public class BoxScript : MonoBehaviour
         {
             Destroy(gun);
             active = true;
+        }
+
+        if (Random.value < 0.3f)
+        {
+            boxManager.MoveBox();
         }
     }
 

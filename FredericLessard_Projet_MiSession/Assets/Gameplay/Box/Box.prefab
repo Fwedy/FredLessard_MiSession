@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3043401978864508702}
   m_Layer: 0
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: GunBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cfeb123b407424d802a60314f54ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxManager: {fileID: 0}
   rollLenght: 40
   guns:
   - {fileID: 4069311094334853856, guid: 62dc18958aca1db4ebc52d1537ee9bff, type: 3}
@@ -192,6 +193,7 @@ MonoBehaviour:
   - {fileID: 2615215470874115256, guid: d26250e18f1847b4ba7e4b8c8863daa9, type: 3}
   - {fileID: 8485647854457495271, guid: 35eba707a59b5204a91582a54ac935f1, type: 3}
   gunS: []
+  active: 1
   boxCost: 0
 --- !u!58 &3043401978864508702
 CircleCollider2D:
