@@ -53,7 +53,7 @@ public class BoxManager : MonoBehaviour
         if (activeBox != null)
         {
             lastBox = activeBox;
-            activeBox.GetComponent<BoxScript>().enabled = false;
+            activeBox.GetComponent<BoxScript>().enabledBox = false;
             lastBox.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
         }
 

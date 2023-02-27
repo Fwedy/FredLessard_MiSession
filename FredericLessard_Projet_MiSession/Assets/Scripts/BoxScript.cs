@@ -8,7 +8,7 @@ public class BoxScript : MonoBehaviour
    private GameManager gameManager;
 
     public BoxManager boxManager;
-    public bool enabled = false;
+    public bool enabledBox = false;
 
     private GameObject gunRoller;
     [SerializeField] private int rollLenght;
