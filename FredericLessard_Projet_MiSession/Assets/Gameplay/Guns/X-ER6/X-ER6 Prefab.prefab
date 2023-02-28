@@ -28,6 +28,10 @@ PrefabInstance:
       value: -0.293
       objectReference: {fileID: 0}
     - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d16d3fe60ed0dc4d959fc985dd37b50, type: 3}
+    - target: {fileID: 4551141680363754540, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
       propertyPath: bulletType
       value: 
       objectReference: {fileID: 2036135548615917722, guid: fa0cd912b9233c64eb5c2f4bb6509370, type: 3}

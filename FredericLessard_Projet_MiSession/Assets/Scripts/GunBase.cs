@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+    
+
 public class GunBase : MonoBehaviour
 {
     private GameManager gameManager;
@@ -38,7 +40,7 @@ public class GunBase : MonoBehaviour
     private float ammoInStash;
     private bool reloading = false;
 
-    private AudioSource shootSFX;
+    [SerializeField] private AudioClip shootSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +51,7 @@ public class GunBase : MonoBehaviour
         armsManager = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ArmsManager>();
         ammoTXT = GameObject.FindGameObjectWithTag("AmmoTXT").GetComponent<TextMeshProUGUI>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        shootSFX = GetComponent<AudioSource>();
+       // shootSFX = GetComponent<AudioSource>();
 
         this.fireSpeed = GunSO.fireFreq;
         this.gunName = GunSO.gunName;
@@ -137,7 +139,7 @@ public class GunBase : MonoBehaviour
         ammoTXT.text = ammoInMag + "/" + ammoInStash;
 
         if (shootSFX != null)
-            shootSFX.Play();
+            AudioSource.PlayClipAtPoint(shootSFX, this.transform.position);
 
         if (ammoInMag <= 0)
         {
