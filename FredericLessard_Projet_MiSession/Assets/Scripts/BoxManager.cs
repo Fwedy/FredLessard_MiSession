@@ -54,6 +54,7 @@ public class BoxManager : MonoBehaviour
         {
             lastBox = activeBox;
             activeBox.GetComponent<BoxScript>().enabledBox = false;
+            activeBox.GetComponent<Transform>().GetChild(1).gameObject.SetActive(false);
             lastBox.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
         }
 
@@ -62,9 +63,9 @@ public class BoxManager : MonoBehaviour
             activeBox = boxList[Random.Range(0, boxList.Count)];
             
         }
-
+        activeBox.GetComponent<BoxScript>().enabledBox = true;
         activeBox.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
+        activeBox.GetComponent<Transform>().GetChild(1).gameObject.SetActive(true);
 
-        
     }
 }

@@ -457,6 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VolumeSlider: {fileID: 6324478218856149432}
+  roundTXT: {fileID: 0}
+  mainMenu: {fileID: 0}
+  gameManager: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &6324478218498599320
 GameObject:
   m_ObjectHideFlags: 0

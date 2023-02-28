@@ -635,7 +635,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -480102133, guid: cfe155a023742a247b588799aa9013ca, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1933454936, guid: 3f40098bc6f98964991978e8b9e87498, type: 3}
+    m_Data: {fileID: 708289416, guid: eb484cd2518c5bc4fb29b77d4a5bb112, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 39
     m_Data:
@@ -659,7 +659,7 @@ Tilemap:
   - m_RefCount: 38
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.91852057, g: 0.46271235, b: 0.49911305, a: 1}
+    m_Data: {r: 0.7835149, g: 0.3897873, b: 0.39796692, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -704,7 +704,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

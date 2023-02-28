@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1474274637749529674, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
+      propertyPath: m_Radius
+      value: 1.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4551141680363754538, guid: 6fa27feb5b3a9044196f8edf774935b2, type: 3}
       propertyPath: m_Name
       value: Maneater Prefab
