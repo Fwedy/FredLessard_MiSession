@@ -20,6 +20,8 @@ public class BulletBase : MonoBehaviour
     {
         bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        
+        //Référence Flyweight
         spriteRenderer.sprite = bulletSO.sprite;
         
         this.damage = bulletSO.damage;

@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FrequentUpdates
+  m_EditorClassIdentifier: 
+  m_GroupName: FrequentUpdates
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 39b96cf6c45659b40a577b9b0534ca13
+  m_SerializeEntries:
+  - m_GUID: dd708d89bfac18444a3da685d721c2e8
+    m_Address: Zombie_Base
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: 774e99d5f9c91984ab7e0256134a7f7f
+    m_Address: Creature_Runner
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: eefe265a8d3323a499af5b5f09205a32
+    m_Address: Zombie_1_Prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: dc07b6c071a7c6447bbc9253296ceaf8
+    m_Address: CrawlerWalk
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: 1fbd5377a25697c4783a81fa34e0fcec
+    m_Address: CrawlerDeath
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+  - m_GUID: d78e6782017699944abf4df0962f8378
+    m_Address: Box
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Interactable\
+    - Interactables
+  - m_GUID: ba7336cd7e0174c4c8e3fbe7da5ed500
+    m_Address: Gameplay_Scene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scene
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bc1cbb28b2b0bb6459b567150ff4676d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8bca693d0b399b44695a5fa4dfa24825, type: 2}
+    - {fileID: 11400000, guid: 05b8830a6aa8d0844ba6c3efbfc59f5a, type: 2}

@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gORoundsTXT;
+
+    public int coins;
     public static GameManager Instance
     {
         get
@@ -205,6 +207,11 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Animator>().SetBool("Hurt", true);
         yield return new WaitForSeconds(0.25f);
         player.GetComponent<Animator>().SetBool("Hurt", false);
+    }
+
+    public void CoinPickup()
+    {
+        coins += 10;
     }
 
 }

@@ -1,0 +1,358 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: RareUpdates
+  m_EditorClassIdentifier: 
+  m_GroupName: RareUpdates
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7ad10da107ab01643ad5c9f6df3baf06
+  m_SerializeEntries:
+  - m_GUID: 8c862b129ba07df4486edb44a4e610ad
+    m_Address: TX Tileset Wall_9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 7fdb74416d79ffc49b75f70363143b19
+    m_Address: TX Tileset Wall_8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 66c4fc72c08f0394c8c90886cce70441
+    m_Address: TX Tileset Wall_7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: c2740cee78a07104fb09423abd173090
+    m_Address: TX Tileset Wall_6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 1da89e4c5557d4f4cbb5633f1327ffb7
+    m_Address: TX Tileset Wall_58
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 2dd7675d7f80f1e42a767f5df14ff05d
+    m_Address: TX Tileset Wall_57
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 6419fa12c2ab1a74e8528d989632dfb7
+    m_Address: TX Tileset Wall_5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 554d34d017f2c8b4e88d88cb7b62892b
+    m_Address: TX Tileset Wall_42
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: c6cd2981ec054e24aaa8495a96ef0428
+    m_Address: TX Tileset Wall_41
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: d2c400f39316bba4b8aff2aaafd98278
+    m_Address: TX Tileset Wall_40
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 466c8353fb6b86947800ee85fb4d84ca
+    m_Address: TX Tileset Wall_4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 1766230c3fd8adc4ca829a6c44a307c1
+    m_Address: TX Tileset Wall_36
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 2995d78a25ce48648b626b28061f3136
+    m_Address: TX Tileset Wall_35
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 7f3f96e7cf9a72b4da3a0b9f26ae27f7
+    m_Address: TX Tileset Wall_33
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 9082e6ca0ce293b48b11279b0a41a44e
+    m_Address: TX Tileset Wall_32
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 4f5f90507b9b84a47ba31b56001492c4
+    m_Address: TX Tileset Wall_31
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 791049d4118aec349a98af8c971f62c2
+    m_Address: TX Tileset Wall_30
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: aa9fca9607dd5af45b846e14d3c5aa40
+    m_Address: TX Tileset Wall_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: b3edc42943956734c915a878edb9cba1
+    m_Address: TX Tileset Wall_29
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 46e7abd7d568ec140a95085c0f62a019
+    m_Address: TX Tileset Wall_28
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: cd1f9d707bff3684b9f0d9ad8da1506e
+    m_Address: TX Tileset Wall_27
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 63e6bd300274b09479717d96ff53351c
+    m_Address: TX Tileset Wall_26
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: b8dbc87f9830bc9468525bc65fa1c67e
+    m_Address: TX Tileset Wall_25
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 6f57302281d10d446aef1ba11cf5be34
+    m_Address: TX Tileset Wall_24
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: e4c508df95a40834b828c2a1146dab2e
+    m_Address: TX Tileset Wall_23
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: c19059263b69d014f91365cc42f0ed24
+    m_Address: TX Tileset Wall_22
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: cd5a905c38c50eb4c87a0fa4678622e3
+    m_Address: TX Tileset Wall_21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 8b2d616ba556f684ca41e8e6bd29edef
+    m_Address: TX Tileset Wall_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: f96755429c259264dbabf08848fb9f73
+    m_Address: TX Tileset Wall_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 390c85300eaeaf144a4c6f78ba60ed26
+    m_Address: TX Tileset Wall_19
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 965545b619d9f60458efc025ef8118a8
+    m_Address: TX Tileset Wall_18
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: e0b73ccdc688fb24ca6c7389770d07a9
+    m_Address: TX Tileset Wall_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: e01f620cd172eca4eaa5471664094a59
+    m_Address: TX Tileset Wall_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: c4f939f7f05969846a96aba63bec55dc
+    m_Address: TX Tileset Wall_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: b216849d5ee05dd4e945b64dbb46886c
+    m_Address: TX Tileset Wall_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: abbd5a9ef32fd004a90b80cb6d51a261
+    m_Address: TX Tileset Wall_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: d94914dc2a3a8b44ab4148426545b0d7
+    m_Address: TX Tileset Wall_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 5f2ad532de2fe30499984d5cb7f008a5
+    m_Address: TX Tileset Wall_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: f104f76bbaf386947b687e61233d8f3e
+    m_Address: TX Tileset Wall_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 3b82f0cb190811a44910e0e2dc6ad361
+    m_Address: TX Tileset Wall_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 3719a6ef8628247458a27584855cf424
+    m_Address: TX Tileset Wall_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: cfe155a023742a247b588799aa9013ca
+    m_Address: TX Tileset Wall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 9b992c5e3b8791f4c864a3008974201d
+    m_Address: TX Tileset Stone Ground
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 2b9c3cbfb8f0d7d4bb2b639b63bed5fd
+    m_Address: TX Tileset Grass
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 80161b6d001627241a4ee7f8ab00cb06
+    m_Address: TX Struct_7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: b98d7b3756336df479f7d1ea9347e11e
+    m_Address: TX Struct_6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 60c00d2b252a542418437630d817a593
+    m_Address: TX Struct_5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: d37883ff49dced741a24556e5d3436a8
+    m_Address: TX Struct_4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 0f2819dbd542b9447b029629140deb11
+    m_Address: TX Struct_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 71a807b83f5ccc648a6d338f39b3e09d
+    m_Address: TX Struct_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: d4ed11ed28a5f64429388279e0c1bb6f
+    m_Address: TX Struct_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 5934441d500b5a14bb42b30d6b2cdcb2
+    m_Address: TX Struct_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: ef97c839db824634fad3bd48956c957f
+    m_Address: TX Struct
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 17ee6e99bac88af43a5b982803e5ce3f
+    m_Address: TX Shadow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: eb484cd2518c5bc4fb29b77d4a5bb112
+    m_Address: TX Props
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 3f40098bc6f98964991978e8b9e87498
+    m_Address: TX Plant
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 4a7e6a62ea890ff4c9485176a8c026ac
+    m_Address: Trees RTS
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 66df3ad647207d34daba57cb5323081d
+    m_Address: TopBorderWall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 524ed2b3b0651574390575947ac9d1d6
+    m_Address: TopBorderRandom
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: d565fc67542c6704a8a6d735f55d6baa
+    m_Address: Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: a0d31628f59af8e43a55c682fcd3cc3b
+    m_Address: RightBorderRandom 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: cb14971cfc2f1524e9ec4aaa5138bed0
+    m_Address: RandomPathTiles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: c35b5e2dcbeff5c4ea40e8de5e47427a
+    m_Address: Palettes
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: a5a0d80dfadd82d4abd439b9cc192e2e
+    m_Address: LeftBorderRandom
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 69eea6b4f254ac0438ed5336fa3b712b
+    m_Address: Grass Random Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: b570f9aea4623514992d46eccb155b7d
+    m_Address: BottomBorderWall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Textures
+  - m_GUID: 5ad7b7ed6e47ec14b9ee8e17d6571437
+    m_Address: Music_ChipMode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bc1cbb28b2b0bb6459b567150ff4676d, type: 2}
+  m_SchemaSet:
+    m_Schemas: []

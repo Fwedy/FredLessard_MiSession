@@ -1,0 +1,45 @@
+{
+  "strings": [
+    {
+        "key": "start_button",
+        "en": "Start Game",
+        "fr": "Démarrer le jeu",
+        "es": "Iniciar juego",
+        "it": "Avviare Il Gioco",
+        "de": "Spiel Starten"
+
+    },
+    {
+      "key": "options_button",
+      "en": "Settings",
+      "fr": "Options",
+      "es": "Opciones",
+        "it": "Opzioni",
+        "de": "Optionen"
+    },
+    {
+        "key": "exit_button",
+        "en": "Exit Game",
+        "fr": "Quitter le jeu",
+        "es": "Salir del juego",
+        "it": "Gioco d'Uscita",
+        "de": "Exit-Spiel"
+    },
+    {
+        "key": "signuppanel_button",
+        "en": "Sign Up",
+        "fr": "S'inscrire",
+        "es": "Inscribirse",
+        "it": "Iscriviti",
+        "de": "Anmeldung"
+    },
+    {
+        "key": "signinpanel_button",
+        "en": "Sign In",
+        "fr": "Se Connecter",
+        "es": "Iniciar Sesión",
+        "it": "Accedi",
+        "de": "Eintragen"
+    }
+  ]
+}

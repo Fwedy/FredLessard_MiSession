@@ -11,9 +11,12 @@ public class ObjectPool_Bullets : MonoBehaviour
     [SerializeField] GameObject bulletBase;
 
     public bool damageBoostPerk = false;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
+
+        //Créer les balles au début du jeu
         for (int i = 0; i < maxBullets; i++)
         {
             var newBullet = Instantiate(bulletBase);
@@ -23,6 +26,7 @@ public class ObjectPool_Bullets : MonoBehaviour
         }
     }
 
+    // Active une nouvelle balle quand le joueur tire
     public GameObject FindAvailableBullet()
     {
         for (int i = 0; i < maxBullets; i++)
@@ -45,6 +49,7 @@ public class ObjectPool_Bullets : MonoBehaviour
         return bulletList[40];
     }
 
+    //Changer le type de balles quand le joueur change de fusil
     public void BulletChange(GameObject newBullet)
     {
         for (int i = 0; i < bulletList.Count; i++)

@@ -1,0 +1,109 @@
+{
+    "strings": [
+        {
+            "key": "start_button",
+            "en": "Start Game",
+            "fr": "Démarrer le jeu",
+            "es": "Iniciar juego",
+            "it": "Avviare Il Gioco",
+            "de": "Spiel Starten"
+
+        },
+        {
+            "key": "options_button",
+            "en": "Options",
+            "fr": "Options",
+            "es": "Opciones",
+            "it": "Opzioni",
+            "de": "Optionen"
+        },
+        {
+            "key": "exit_button",
+            "en": "Exit Game",
+            "fr": "Quitter le jeu",
+            "es": "Salir del juego",
+            "it": "Gioco d'Uscita",
+            "de": "Exit-Spiel"
+        },
+        {
+            "key": "signuppanel_button",
+            "en": "Sign Up",
+            "fr": "S'inscrire",
+            "es": "Inscribirse",
+            "it": "Iscriviti",
+            "de": "Anmeldung"
+        },
+        {
+            "key": "signinpanel_button",
+            "en": "Sign In",
+            "fr": "Se Connecter",
+            "es": "Iniciar Sesión",
+            "it": "Accedi",
+            "de": "Eintragen"
+        },
+        {
+            "key": "volume_text",
+            "en": "Volume",
+            "fr": "Volume",
+            "es": "Volumen",
+            "it": "Volume",
+            "de": "Lautstärke"
+        },
+        {
+            "key": "email_text",
+            "en": "Email...",
+            "fr": "Courriel...",
+            "es": "Correo electrónico...",
+            "it": "Email...",
+            "de": "E-Mail..."
+        },
+        {
+            "key": "password_text",
+            "en": "Password...",
+            "fr": "Mot De Passe...",
+            "es": "Contraseña...",
+            "it": "Parola d'Ordine...",
+            "de": "Passwort..."
+        },
+        {
+            "key": "emailverification_button",
+            "en": "Resend Email Verification",
+            "fr": "Revoyer Le Courriel De Vérification",
+            "es": "Reenviar Verificación De Correo Electrónico",
+            "it": "Reinvio Dell'E-mail Di Verifica",
+            "de": "E-Mail-Bestätigung Erneut Senden"
+        },
+        {
+            "key": "activatecode_text",
+            "en": "Activate Code",
+            "fr": "Activer Un Code",
+            "es": "Activar Código",
+            "it": "Attivare Il Codice",
+            "de": "Code Aktivieren"
+        },
+        {
+            "key": "promocode_text",
+            "en": "Promo Code",
+            "fr": "Code Promo",
+            "es": "Código Promocional",
+            "it": "Codice Promozionale",
+            "de": "Promo-Code"
+        },
+        {
+            "key": "codeinput_text",
+            "en": "Code...",
+            "fr": "Code...",
+            "es": "Código...",
+            "it": "Codice...",
+            "de": "Code..."
+        },
+        {
+            "key": "activate_button",
+            "en": "Activate",
+            "fr": "Entrer",
+            "es": "Activar",
+            "it": "Attivare",
+            "de": "Aktivieren Sie"
+        }
+    ]
+}

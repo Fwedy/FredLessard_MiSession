@@ -47,6 +47,7 @@ public class EnemyFactory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Envoie les prefab appropriés et ajoutes les classes au jeu.
         crawlerFactory = gameObject.AddComponent<CrawlerZombieFactory>();
         crawlerFactory.zombiePrefab = crawlerPrefab;
         currrentFactory = crawlerFactory;
@@ -56,6 +57,7 @@ public class EnemyFactory : MonoBehaviour
    
     }
 
+    //Choisi le type de zombie aléatoirement
     private void RandomizeCreatureSpawns()
     {
         var x = Random.Range(1, 3);
@@ -70,6 +72,7 @@ public class EnemyFactory : MonoBehaviour
     }
 
 
+    //Retourne un zombie intancié
     public GameObject CreateNewZombie()
     {
         RandomizeCreatureSpawns();
