@@ -59,43 +59,81 @@ public class AccountManager : MonoBehaviour
 
     public void OnSignUp()
     {
-        password = signUpPswdField.text.ToString();
-        email = signUpEmailField.text.ToString();
-
-        if (email != null && password != null)
+        
+        
+        if (CheckEmailValidity())
         {
-            StartCoroutine(CreateNewAccount());
-        }
-        else
-        {
-            SU_InfoTxt.text = "Some input information is missing.";
-            SU_InfoTxt.color = Color.red;
+            email = signUpEmailField.text.ToString();
+            password = signUpPswdField.text.ToString();
+            if (password.Length > 1)
+            {
+                StartCoroutine(CreateNewAccount());
+            }
+            else
+            {
+                SU_InfoTxt.text = "Some input information is missing.";
+                SU_InfoTxt.color = Color.red;
+            }
         }
     }
 
     public void OnSignIn()
     {
         password = signInPswdField.text.ToString();
-        email = signInEmailField.text.ToString();
-        if (email != null && password != null)
+        
+        if (CheckEmailValidity())
         {
-            StartCoroutine(SignIn());
+            
+          
+            if (password.Length > 1)
+            {
+                StartCoroutine(SignIn());
+                email = signInEmailField.text.ToString();
+            }
+            else
+            {
+                SI_InfoTxt.text = "Some input information is missing.";
+                SI_InfoTxt.color = Color.red;
+            }
         }
-        else
-        {
-            SI_InfoTxt.text = "Some input information is missing.";
-            SI_InfoTxt.color = Color.red;
-        }
+        
     }
 
     public void OnResendEmailVerification()
     {
-        email = signUpEmailField.text.ToString();
-        if (email != null && password != null)
+        
+        if (CheckEmailValidity())
         {
-            StartCoroutine(EmailVerification());
+            SI_InfoTxt.text = "";
+            email = signUpEmailField.text.ToString();
+            
+                StartCoroutine(EmailVerification());
+            
         }
+       
     }
+    private bool CheckEmailValidity()
+    {
+        //only one "@"
+        //after @, XXXX"."xxx
+        string emailPattern = @"^[a-z][^@ ]+@\w+\.\w+";
+
+        if (Regex.IsMatch(signInEmailField.text.ToString(), emailPattern, RegexOptions.IgnoreCase) ||
+           Regex.IsMatch(signUpEmailField.text.ToString(), emailPattern, RegexOptions.IgnoreCase)) { 
+            
+            return true; 
+        }
+        else {
+            SI_InfoTxt.text = "Email format is incorect.";
+            SI_InfoTxt.color = Color.red;
+            SU_InfoTxt.text = "Email format is incorect.";
+            SU_InfoTxt.color = Color.red;
+            return false; 
+        }
+
+    }
+
+
 
 
     public IEnumerator CreateNewAccount()
@@ -197,5 +235,31 @@ public class AccountManager : MonoBehaviour
          }
      } */
 
+    public void EmailFieldValidator_SU()
+    {
+        if (CheckEmailValidity())
+        {
+            signUpEmailField.color = Color.black;
+            SU_InfoTxt.text = "";
+            
+        }
+        else
+        {
+            signUpEmailField.color = Color.red;
+        }
+    }
+
+    public void EmailFieldValidator_SI()
+    {
+        if (CheckEmailValidity())
+        {
+            signInEmailField.color = Color.black;
+            SI_InfoTxt.text = "";
+        }
+        else
+        {
+            signInEmailField.color = Color.red;
+        }
+    }
 
 }
