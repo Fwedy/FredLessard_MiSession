@@ -57,16 +57,13 @@ public class PromoCodeManager : MonoBehaviour
      
         string uri = "https://parseapi.back4app.com/classes/promocode/?where="+ json;
         */                                                                             //add variable
+        code = Uri.EscapeUriString("{\"Code\":\"" + code.Replace("\u200B", "") + "\"}");
+        string uri = "https://parseapi.back4app.com/classes/promocode/?where=" + code;
 
-        string jsonBody = "?where={\"Code\":\"" + code + "\"}";
-
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
-        string uri = "https://parseapi.back4app.com/classes/promocode/" ;
-
-            Debug.Log(uri);
+        Debug.Log(uri);
         using (var request = UnityWebRequest.Get(uri))
         {
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
             
@@ -106,16 +103,18 @@ public class PromoCodeManager : MonoBehaviour
                 {
                     promoCodeInfoText.text = "Code Redeemed!";
                     promoCodeInfoText.color = Color.green;
-                    var oID_matches = Regex.Matches(request.downloadHandler.text, "\"objectId\":(\\w+)", RegexOptions.Multiline);
-                    StartCoroutine(ReturnUsedCode("aaa"/*oID_matches.Last().ToString()*/));
+                    var oID_matches = Regex.Match(request.downloadHandler.text, "\"objectId\":\"(\\w+)\"", RegexOptions.Multiline);
+                     Debug.Log(oID_matches.Groups[1].Value);
+                    StartCoroutine(ReturnUsedCode(oID_matches.Groups[1].Value));
                 
             }
         }
     }
 
     public IEnumerator ReturnUsedCode(string objectID)
-    {                                                                                              //add variable, not hard coded
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/promocode/ApFz6MSyd5", "PUT"))
+    {                   
+        //add variable, not hard coded
+        using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/promocode/"+objectID, "PUT"))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
