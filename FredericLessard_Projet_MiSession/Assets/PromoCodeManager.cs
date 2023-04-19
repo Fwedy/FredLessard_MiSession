@@ -53,12 +53,9 @@ public class PromoCodeManager : MonoBehaviour
     public IEnumerator GetCode(string code)
     {
 
-        /*string json = JsonConvert.SerializeObject(new { Code = codeInputField.text.ToString() });
-     
-        string uri = "https://parseapi.back4app.com/classes/promocode/?where="+ json;
-        */                                                                             //add variable
+                                                                                   //add variable
         code = Uri.EscapeUriString("{\"Code\":\"" + code.Replace("\u200B", "") + "\"}");
-        string uri = "https://parseapi.back4app.com/classes/promocode/?where=" + code;
+        /*string uri = "https://parseapi.back4app.com/classes/promocode/?where=" + code;
 
         Debug.Log(uri);
         using (var request = UnityWebRequest.Get(uri))
@@ -66,8 +63,14 @@ public class PromoCodeManager : MonoBehaviour
             
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            
-          
+          */
+        using (var request = new WebRequestBuilder()
+            .SetUrl("classes/promocode/?where=" + code)
+            .SetType("GET")
+            .SetDownloadHandler(new DownloadHandlerBuffer())
+            .Build()
+            ) { 
+
             yield return request.SendWebRequest();
             
             if (request.result != UnityWebRequest.Result.Success)

@@ -9,11 +9,11 @@ using UnityEngine;
 public class LanguageData
 {
     public string key;
-    public string en;
-    public string fr;
-    public string es;
-    public string it;
-    public string de;
+    public string EN;
+    public string FR;
+    public string ES;
+    public string IT;
+    public string DE;
 }
 
 [Serializable]
@@ -24,37 +24,37 @@ public class StringsData
 
 public class LanguageLocalization : MonoBehaviour
 {
-    public string currentLanguage = "en";
+    public string currentLanguage = "EN";
     private Dictionary<string, string> localizedStrings;
 
     public List<TextLocalizer> translatedTexts = new List<TextLocalizer>();
+
+    private static readonly Dictionary<string, int> LanguageColumn = new Dictionary<string, int>()
+    {
+        { "EN", 1 },
+        { "FR", 2 },
+        { "ES", 3 },
+        { "IT", 4 },
+        { "DE", 5 },
+    };
+
+    private void Start()
+    {
+        SetLanguage("EN");
+    }
+
     public void LoadStrings()
     {
-        string stringFile = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "LanguagesStrings.json"));
-        var data = JsonUtility.FromJson<StringsData>(stringFile);
+        string fileContents = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "a.tsv"));        
+        string[] lines = fileContents.Split('\n');
 
         localizedStrings = new Dictionary<string, string>();
-        foreach (var stringData in data.strings)
+        for (int i = 1; i < lines.Length; i++)
         {
-
-            switch (currentLanguage)
-            {
-                case "en":
-                    localizedStrings[stringData.key] = stringData.en;
-                    break;
-                case "fr":
-                    localizedStrings[stringData.key] = stringData.fr;
-                    break;
-                case "es":
-                    localizedStrings[stringData.key] = stringData.es;
-                    break;
-                case "it":
-                    localizedStrings[stringData.key] = stringData.it;
-                    break;
-                case "de":
-                    localizedStrings[stringData.key] = stringData.de;
-                    break;
-            }
+            string[] fields = lines[i].Split('\t');
+            string key = fields[0];
+            string localizedString = fields[(int)LanguageColumn[currentLanguage]].Trim();
+            localizedStrings[key] = localizedString;
         }
     }
 

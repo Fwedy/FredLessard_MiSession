@@ -193,15 +193,35 @@ public class AccountManager : MonoBehaviour
     public IEnumerator SignIn()
     {
 
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/login", "POST"))
+        /*  using (var request = new UnityWebRequest("https://parseapi.back4app.com/login", "POST"))
+          {
+              request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
+              request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+              request.SetRequestHeader("X-Parse-Revocable-Session", "1");
+              var json = JsonConvert.SerializeObject(new { username = email, password = password });
+
+              request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
+              request.downloadHandler = new DownloadHandlerBuffer();
+              yield return request.SendWebRequest();
+              if (request.result != UnityWebRequest.Result.Success)
+              {
+                  SI_InfoTxt.text = request.error;
+                  SI_InfoTxt.color = Color.red;
+                  yield break;
+              }
+              SI_InfoTxt.text = "Signed In Successfully";
+              SI_InfoTxt.color = Color.green;
+              Debug.Log(request.downloadHandler.text);
+          } */
+
+        using (var request = new WebRequestBuilder()
+        .SetUrl("login")
+        .SetType("POST")
+        .Revocable()
+        .SetJSON(new { username = email, password = password })
+        .SetDownloadHandler(new DownloadHandlerBuffer())
+        .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Revocable-Session", "1");
-            var json = JsonConvert.SerializeObject(new { username = email, password = password });
-            
-            request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-            request.downloadHandler = new DownloadHandlerBuffer();
             yield return request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -211,8 +231,10 @@ public class AccountManager : MonoBehaviour
             }
             SI_InfoTxt.text = "Signed In Successfully";
             SI_InfoTxt.color = Color.green;
-            Debug.Log(request.downloadHandler.text);
+            Debug.LogWarning(request.downloadHandler.text);
         }
+        
+        
     }
 
     /* public IEnumerator GetDeathTracker()

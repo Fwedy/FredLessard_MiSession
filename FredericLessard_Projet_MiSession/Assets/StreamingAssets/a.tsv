@@ -1,0 +1,14 @@
+Key	FR	EN	ES	IT	DE
+start_button	Start Game	Démarrer le jeu	Iniciar juego	Avviare Il Gioco	Spiel Starten
+options_button	Options	Options	Opciones	Opzioni	Optionen
+exit_button	Exit Game	Quitter le jeu	Salir del juego	Gioco d'Uscita	Exit-Spiel
+signuppanel_button	Sign Up	S'inscrire	Inscribirse	Iscriviti	Anmeldung
+signinpanel_button	Sign In	Se Connecter	Iniciar Sesion	Accedi	Eintragen
+volume_text	Volume	Volume	Volumen	Volume	Lautstarke
+email_text	Email...	Courriel...	Correo electronico...	Email...	E-Mail...
+password_text	Password...	Mot De Passe...	Contrasena...	Parole d'Ordine...	Passwort...
+emailverification_button	Resend Email Verification	Revoyer Le Courriel De Vérification	Reenviar Verificación De Correo Electrónico	Reinvio Dell'E-mail Di Verifica	E-Mail-Bestätigung Erneut Senden
+activatecode_text	Activate Code	Activer Un Code	Activar Codigo	Attivare Il Codice	Code Aktivieren
+promocode_text	Promo Code	Code Promo	Codigo Promocional	Codice Promozionale	Promo_Code
+codeinput_text	Code...	Code...	Codigo...	Codice...	Code...
+activate_button	Activate Code	Entrer	Activar Codigo	Attivare Il Codice	Aktivieren Sie
