@@ -9698,6 +9698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageSwitcher: {fileID: 1553852613}
+  languageDropdown: {fileID: 1087552220}
 --- !u!114 &2111884983
 MonoBehaviour:
   m_ObjectHideFlags: 0

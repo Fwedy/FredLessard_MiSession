@@ -12,6 +12,9 @@ public class ArmsManager : MonoBehaviour
     [Inject] private ObjectPool_Bullets bulletPool;
 
     public bool paused = false;
+
+    private GameManager gameManager;
+    public bool testMode = false;
     private void Start()
     {
         Resources.Load<Sprite>("2");
@@ -21,12 +24,12 @@ public class ArmsManager : MonoBehaviour
         currentGun.transform.localRotation = Quaternion.Euler(0, 0, -90);
         currentGun.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -0.03f);
         //bulletPool = GameObject.FindGameObjectWithTag("BulletPool").GetComponent<ObjectPool_Bullets>();
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         currentGun.GetComponent<GunBase>().activeGun = true;
     }
     void Update()
     {
-        if (!paused)
+        if (!paused && !testMode)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -39,6 +42,25 @@ public class ArmsManager : MonoBehaviour
             float angle = Vector2.SignedAngle(Vector2.right, direction);
             backHand.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
+        }else if(!paused && testMode && gameManager.enemies.Count > 0)
+        {
+            GameObject nearestEnemy = gameManager.enemies[0];
+
+
+                foreach (GameObject enemy in gameManager.enemies) {
+                        if (Vector2.Distance(enemy.transform.position, gameObject.transform.position) < Vector2.Distance(nearestEnemy.transform.position, gameObject.transform.position))
+                         {
+                    nearestEnemy = enemy;
+                          }
+
+                    }
+            Vector2 direction = new Vector2(
+                nearestEnemy.transform.position.x - backHand.transform.position.x,
+                nearestEnemy.transform.position.y - backHand.transform.position.y
+            );
+
+            float angle = Vector2.SignedAngle(Vector2.right, direction);
+            backHand.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         }
     }
 

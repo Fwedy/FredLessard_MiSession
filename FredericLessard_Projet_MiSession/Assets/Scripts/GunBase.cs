@@ -29,18 +29,18 @@ public class GunBase : MonoBehaviour
 
     private bool canShoot = true;
     
-    private float fireSpeed;
+    public float fireSpeed;
     private bool automatic;
     private bool autoShooting = false;
     private bool currentlyShooting = false;
     public string gunName;
 
     [SerializeField] TextMeshProUGUI ammoTXT;
-    private float ammoInMag;
+    public float ammoInMag;
     private float ammoInStash;
     private bool reloading = false;
 
-    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] public AudioClip shootSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +122,7 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
 
         StartCoroutine(ShootDelay());
