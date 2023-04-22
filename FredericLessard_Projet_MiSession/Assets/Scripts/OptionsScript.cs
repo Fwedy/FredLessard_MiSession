@@ -78,7 +78,7 @@ public class OptionsScript : MonoBehaviour
 
     public void OnMainMenuBTNClick()
     {
-        PersistentData.Serialize(gameManager.coins,"");
+        PersistentData.Serialize(gameManager.coins,"",null);
 
         SceneManager.LoadScene(mainMenu.sceneName);
     }

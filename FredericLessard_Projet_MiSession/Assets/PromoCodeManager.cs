@@ -153,12 +153,12 @@ public class PromoCodeManager : MonoBehaviour
     {
         if (usedCode[0] == 'P')
         {
-            PersistentData.Serialize(100,"P");
-            
+            PersistentData.Serialize(100, "P", null);
+
             gameObject.GetComponent<SavedData_MM>().ReloadCoins();
         }else if (usedCode[0] == 'D')
         {
-            PersistentData.Serialize(100, "D");
+            PersistentData.Serialize(100, "D", null);
             backgroundPanel.color = Color.gray;
         }
         else

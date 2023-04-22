@@ -29,7 +29,7 @@ public class LanguageLocalization : MonoBehaviour
 
     public List<TextLocalizer> translatedTexts = new List<TextLocalizer>();
 
-    private static readonly Dictionary<string, int> LanguageColumn = new Dictionary<string, int>()
+    private Dictionary<string, int> LanguageColumn = new Dictionary<string, int>()
     {
         { "en", 1 },
         { "fr", 2 },

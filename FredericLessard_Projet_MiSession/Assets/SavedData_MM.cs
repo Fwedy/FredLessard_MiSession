@@ -18,6 +18,8 @@ public class SavedData_MM : MonoBehaviour
         {
             backgroundPanel.color = Color.gray;
         }
+
+       GameObject.FindGameObjectWithTag("Localizer").GetComponent<LanguageLocalization>().SetLanguage(PersistentData.Deserialize().language);
     }
 
     public void ReloadCoins()

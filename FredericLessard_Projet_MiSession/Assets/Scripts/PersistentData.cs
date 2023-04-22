@@ -7,29 +7,29 @@ using System.IO;
 
 public static class PersistentData { 
     
-    public static void Serialize(int coins, string codeType)
+    public static void Serialize(int coins, string codeType, string language)
     {
-        SaveData saveData = new SaveData(0, "");
+        SaveData saveData = new SaveData(0, "", "en");
         if (File.Exists(Path.Combine(Application.persistentDataPath, "Save.data")))
         {
             saveData = Deserialize();
             saveData.coins += coins;
             saveData.codeTypes += codeType;
-            
+
+           if (language != null)
+              saveData.language = language;
         }
      
-        // Create a hashtable of values that will eventually be serialized.
         Hashtable serializedValues = new Hashtable();
 
         serializedValues.Add("coins", saveData.coins.ToString());
         serializedValues.Add("codeTypes", saveData.codeTypes.ToString());
+        serializedValues.Add("language", saveData.language.ToString());
        
-        // To serialize the hashtable and its key/value pairs,
-        // you must first open a stream for writing.
-        // In this case, use a file stream.
+        
         FileStream fs = new FileStream(Path.Combine(Application.persistentDataPath, "Save.data"), FileMode.Create);
 
-        // Construct a BinaryFormatter and use it to serialize the data to the stream.
+        
         BinaryFormatter formatter = new BinaryFormatter();
         try
         {
@@ -55,19 +55,18 @@ public static class PersistentData {
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "Save.data")))
         {
-            // Open the file containing the data that you want to deserialize.
+            
             FileStream fs = new FileStream(Path.Combine(Application.persistentDataPath, "Save.data"), FileMode.Open);
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();
 
-                // Deserialize the hashtable from the file and
-                // assign the reference to the local variable.
+               
                 dataTable = (Hashtable)formatter.Deserialize(fs);
 
-                saveData = new SaveData(System.Convert.ToInt32(dataTable["coins"]), (string)dataTable["codeTypes"]);
+                saveData = new SaveData(System.Convert.ToInt32(dataTable["coins"]), (string)dataTable["codeTypes"], (string)dataTable["language"]);
                 
-                Debug.Log("Coins:" + saveData.coins + " :: Codes:" + saveData.codeTypes);
+                Debug.Log("Coins:" + saveData.coins + " :: Codes:" + saveData.codeTypes + " :: Language:" + saveData.language);
             }
             catch (SerializationException e)
             {
@@ -81,7 +80,7 @@ public static class PersistentData {
         }
         else
         {
-            saveData = new SaveData(0, "");
+            saveData = new SaveData(0, "", "en");
             
         }
         return saveData;
