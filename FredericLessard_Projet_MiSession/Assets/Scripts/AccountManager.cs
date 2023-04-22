@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using Newtonsoft.Json;
+using System.IO;
 
 public class AccountManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class AccountManager : MonoBehaviour
 
     private string email = null;
     private string password = null;
+
+    private string currentUser = null;
 
     // Start is called before the first frame update
     void Start()
@@ -59,15 +62,16 @@ public class AccountManager : MonoBehaviour
 
     public void OnSignUp()
     {
-        
-        
+
+
         if (CheckEmailValidity())
         {
             email = signUpEmailField.text.ToString();
             password = signUpPswdField.text.ToString();
             if (password.Length > 1)
             {
-                StartCoroutine(CreateNewAccount());
+                StartCoroutine(CheckEmailUnique());
+
             }
             else
             {
@@ -80,15 +84,17 @@ public class AccountManager : MonoBehaviour
     public void OnSignIn()
     {
         password = signInPswdField.text.ToString();
-        
+
         if (CheckEmailValidity())
         {
-            
-          
+
+
             if (password.Length > 1)
             {
-                StartCoroutine(SignIn());
+
                 email = signInEmailField.text.ToString();
+
+                StartCoroutine(CheckCorrectPassword());
             }
             else
             {
@@ -96,21 +102,21 @@ public class AccountManager : MonoBehaviour
                 SI_InfoTxt.color = Color.red;
             }
         }
-        
+
     }
 
     public void OnResendEmailVerification()
     {
-        
+
         if (CheckEmailValidity())
         {
             SI_InfoTxt.text = "";
             email = signUpEmailField.text.ToString();
-            
-                StartCoroutine(EmailVerification());
-            
+
+            StartCoroutine(EmailVerification());
+
         }
-       
+
     }
     private bool CheckEmailValidity()
     {
@@ -119,20 +125,58 @@ public class AccountManager : MonoBehaviour
         string emailPattern = @"^[a-z][^@ ]+@\w+\.\w+";
 
         if (Regex.IsMatch(signInEmailField.text.ToString(), emailPattern, RegexOptions.IgnoreCase) ||
-           Regex.IsMatch(signUpEmailField.text.ToString(), emailPattern, RegexOptions.IgnoreCase)) { 
-            
-            return true; 
+           Regex.IsMatch(signUpEmailField.text.ToString(), emailPattern, RegexOptions.IgnoreCase))
+        {
+
+            return true;
         }
-        else {
+        else
+        {
             SI_InfoTxt.text = "Email format is incorect.";
             SI_InfoTxt.color = Color.red;
             SU_InfoTxt.text = "Email format is incorect.";
             SU_InfoTxt.color = Color.red;
-            return false; 
+            return false;
         }
 
     }
 
+    public IEnumerator CheckEmailUnique()
+    {
+
+        using (var request = new WebRequestBuilder().SetUrl("classes/_User/?where={\"username\":\"" + email + "\"}")
+        .SetType("GET")
+        .SetDownloadHandler(new DownloadHandlerBuffer())
+        .Build())
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error:" + request.error);
+                yield break;
+            }
+            Debug.Log(request.downloadHandler.text);
+
+
+
+            if (request.downloadHandler.text.Length <= 15)
+            {
+
+                StartCoroutine(CreateNewAccount());
+                yield break;
+
+            }
+            else
+            {
+                SU_InfoTxt.text = "This email is already in use";
+                SU_InfoTxt.color = Color.red;
+                yield break;
+            }
+        }
+
+
+    }
 
 
 
@@ -145,9 +189,9 @@ public class AccountManager : MonoBehaviour
             request.SetRequestHeader("X-Parse-Revocable-Session", "1");
             request.SetRequestHeader("Content-Type", "application/json");
 
-           
-            var json = JsonConvert.SerializeObject(new {password = password, email = email, username = email });
-            
+
+            var json = JsonConvert.SerializeObject(new { password = password, email = email, username = email });
+
 
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
@@ -161,19 +205,19 @@ public class AccountManager : MonoBehaviour
             SU_InfoTxt.text = "SignUp Successful! Please Sign-In";
             SU_InfoTxt.color = Color.green;
             Debug.Log(request.downloadHandler.text);
-            
+
         }
     }
 
     public IEnumerator EmailVerification()
     {
-        
+
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/verificationEmailRequest", "POST"))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
             request.SetRequestHeader("Content-Type", "application/json");
-            var json = JsonConvert.SerializeObject(new {email = email});
+            var json = JsonConvert.SerializeObject(new { email = email });
 
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
@@ -190,29 +234,47 @@ public class AccountManager : MonoBehaviour
         }
     }
 
+    public IEnumerator CheckCorrectPassword()
+    {
+        using (var request = new WebRequestBuilder().SetUrl("classes/_User/?where={\"username\":\"" + email + "\"}")
+        .SetType("GET")
+        .SetDownloadHandler(new DownloadHandlerBuffer())
+        .Build())
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error:" + request.error);
+                yield break;
+            }
+            Debug.Log(request.downloadHandler.text);
+
+
+
+            if (request.downloadHandler.text.Length <= 15)
+            {
+
+                SU_InfoTxt.text = "This user does not exist.";
+                SU_InfoTxt.color = Color.red;
+                yield break;
+
+            }
+            else
+            {
+                StartCoroutine(SignIn());
+
+
+                yield break;
+            }
+        }
+
+    }
+
     public IEnumerator SignIn()
     {
 
-        /*  using (var request = new UnityWebRequest("https://parseapi.back4app.com/login", "POST"))
-          {
-              request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-              request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-              request.SetRequestHeader("X-Parse-Revocable-Session", "1");
-              var json = JsonConvert.SerializeObject(new { username = email, password = password });
 
-              request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-              request.downloadHandler = new DownloadHandlerBuffer();
-              yield return request.SendWebRequest();
-              if (request.result != UnityWebRequest.Result.Success)
-              {
-                  SI_InfoTxt.text = request.error;
-                  SI_InfoTxt.color = Color.red;
-                  yield break;
-              }
-              SI_InfoTxt.text = "Signed In Successfully";
-              SI_InfoTxt.color = Color.green;
-              Debug.Log(request.downloadHandler.text);
-          } */
 
         using (var request = new WebRequestBuilder()
         .SetUrl("login")
@@ -225,37 +287,40 @@ public class AccountManager : MonoBehaviour
             yield return request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
-                SI_InfoTxt.text = request.error;
+                SI_InfoTxt.text = "Password is incorect.";
                 SI_InfoTxt.color = Color.red;
                 yield break;
             }
+            currentUser = email;
             SI_InfoTxt.text = "Signed In Successfully";
             SI_InfoTxt.color = Color.green;
             Debug.LogWarning(request.downloadHandler.text);
+            //StartCoroutine(BackupSaveData());
         }
-        
-        
+
+
     }
 
-    /* public IEnumerator GetDeathTracker()
-     {
-         string uri = "https://parseapi.back4app.com/classes/DeathTracker/?where={\"Name\":\"Enemy\"}";
-         using (var request = UnityWebRequest.Get(uri))
-         {
-             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-             yield return request.SendWebRequest();
-             if (request.result != UnityWebRequest.Result.Success)
-             {
-                 Debug.LogError(request.error);
-                 yield break;
-             }
-             Debug.Log(request.downloadHandler.text);
-             var matches = Regex.Matches(request.downloadHandler.text, "\"Count\":(\\d+)", RegexOptions.Multiline);
-             death = int.Parse(matches.Last().Groups[1].Value);
-             enemyDeathText.text = death.ToString();
-         }
-     } */
+    public IEnumerator BackupSaveData()
+    {
+
+        using (var request = new WebRequestBuilder().SetUrl("classes/SaveData")
+        .SetType("POST")
+        .SetDownloadHandler(new DownloadHandlerBuffer())
+        .JSONContentType()
+        .SetJSON(new { username = email, save_data = Path.Combine(Application.persistentDataPath, "Save.data") })
+        .Build())
+        {
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.downloadHandler.text);
+                yield break;
+            }
+        }
+
+    }
+
 
     public void EmailFieldValidator_SU()
     {
@@ -263,7 +328,7 @@ public class AccountManager : MonoBehaviour
         {
             signUpEmailField.color = Color.black;
             SU_InfoTxt.text = "";
-            
+
         }
         else
         {
@@ -283,5 +348,6 @@ public class AccountManager : MonoBehaviour
             signInEmailField.color = Color.red;
         }
     }
+
 
 }

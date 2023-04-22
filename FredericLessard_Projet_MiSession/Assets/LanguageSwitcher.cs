@@ -15,6 +15,6 @@ public class LanguageSwitcher : MonoBehaviour
 
     public void OnLanguageSwitch()
     {
-        localizer.SetLanguage(languageSwitcher.text.ToString().ToUpper());
+        localizer.SetLanguage(languageSwitcher.text.ToString().ToLower());
     }
 }

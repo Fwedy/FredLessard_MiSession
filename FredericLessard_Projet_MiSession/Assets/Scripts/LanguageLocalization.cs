@@ -24,28 +24,28 @@ public class StringsData
 
 public class LanguageLocalization : MonoBehaviour
 {
-    public string currentLanguage = "EN";
+    public string currentLanguage = "en";
     private Dictionary<string, string> localizedStrings;
 
     public List<TextLocalizer> translatedTexts = new List<TextLocalizer>();
 
     private static readonly Dictionary<string, int> LanguageColumn = new Dictionary<string, int>()
     {
-        { "EN", 1 },
-        { "FR", 2 },
-        { "ES", 3 },
-        { "IT", 4 },
-        { "DE", 5 },
+        { "en", 1 },
+        { "fr", 2 },
+        { "es", 3 },
+        { "it", 4 },
+        { "de", 5 },
     };
 
     private void Start()
     {
-        SetLanguage("EN");
+        SetLanguage("en");
     }
 
     public void LoadStrings()
     {
-        string fileContents = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "a.tsv"));        
+        string fileContents = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "a.tsv"));
         string[] lines = fileContents.Split('\n');
 
         localizedStrings = new Dictionary<string, string>();
