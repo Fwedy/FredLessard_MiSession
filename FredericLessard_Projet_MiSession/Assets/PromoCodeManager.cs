@@ -11,6 +11,7 @@ using System.Text;
 using System.Web;
 using System.Net.Http;
 using System;
+using UnityEngine.UI;
 
 public class PromoCodeManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class PromoCodeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI codeInputField;
     [SerializeField] private TextMeshProUGUI promoCodeInfoText;
 
+    //rewards
+    [SerializeField] private Image backgroundPanel;
+
+    private string usedCode = null;
     public void OnEnterCodePanelClick()
     {
         codePanel.SetActive(true);
@@ -41,7 +46,13 @@ public class PromoCodeManager : MonoBehaviour
         if (codeInputField.text.Length == 7)
         {
             string code = codeInputField.text;
-            StartCoroutine(GetCode(code));
+            if (!PersistentData.Deserialize().codeTypes.Contains(code[0]))
+                StartCoroutine(GetCode(code));
+            else
+            {
+                promoCodeInfoText.text = "Code type has already been used.";
+                promoCodeInfoText.color = Color.red;
+            }
         }
         else
         {
@@ -53,7 +64,7 @@ public class PromoCodeManager : MonoBehaviour
     public IEnumerator GetCode(string code)
     {
 
-                                                                                   //add variable
+        usedCode = code;                                                                           //add variable
         code = Uri.EscapeUriString("{\"Code\":\"" + code.Replace("\u200B", "") + "\"}");
         /*string uri = "https://parseapi.back4app.com/classes/promocode/?where=" + code;
 
@@ -134,6 +145,27 @@ public class PromoCodeManager : MonoBehaviour
             }
             
             Debug.Log(request.downloadHandler.text);
+            GiveReward();
         }
+    }
+
+    private void GiveReward()
+    {
+        if (usedCode[0] == 'P')
+        {
+            PersistentData.Serialize(100,"P");
+            
+            gameObject.GetComponent<SavedData_MM>().ReloadCoins();
+        }else if (usedCode[0] == 'D')
+        {
+            PersistentData.Serialize(100, "D");
+            backgroundPanel.color = Color.gray;
+        }
+        else
+        {
+            PersistentData.DeleteSaveFile();
+            gameObject.GetComponent<SavedData_MM>().ReloadCoins();
+        }
+        
     }
 }

@@ -7,20 +7,23 @@ using System.IO;
 
 public static class PersistentData { 
     
-    public static void Serialize(int coins)
+    public static void Serialize(int coins, string codeType)
     {
-        SaveData saveData = new SaveData(0);
+        SaveData saveData = new SaveData(0, "");
         if (File.Exists(Path.Combine(Application.persistentDataPath, "Save.data")))
         {
             saveData = Deserialize();
             saveData.coins += coins;
+            saveData.codeTypes += codeType;
+            
         }
      
         // Create a hashtable of values that will eventually be serialized.
         Hashtable serializedValues = new Hashtable();
 
         serializedValues.Add("coins", saveData.coins.ToString());
-        
+        serializedValues.Add("codeTypes", saveData.codeTypes.ToString());
+       
         // To serialize the hashtable and its key/value pairs,
         // you must first open a stream for writing.
         // In this case, use a file stream.
@@ -43,10 +46,11 @@ public static class PersistentData {
         }
     }
 
+   
+
     public static SaveData Deserialize()
     {
-        // Declare the hashtable reference.
-        Hashtable dataTable= null;
+        Hashtable dataTable = null;
         SaveData saveData = null;
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "Save.data")))
@@ -60,8 +64,10 @@ public static class PersistentData {
                 // Deserialize the hashtable from the file and
                 // assign the reference to the local variable.
                 dataTable = (Hashtable)formatter.Deserialize(fs);
-               
-                saveData = new SaveData(System.Convert.ToInt32(dataTable["coins"]));
+
+                saveData = new SaveData(System.Convert.ToInt32(dataTable["coins"]), (string)dataTable["codeTypes"]);
+                
+                Debug.Log("Coins:" + saveData.coins + " :: Codes:" + saveData.codeTypes);
             }
             catch (SerializationException e)
             {
@@ -70,15 +76,30 @@ public static class PersistentData {
             }
             finally
             {
-
                 fs.Close();
             }
         }
         else
         {
-            saveData = new SaveData(0);
+            saveData = new SaveData(0, "");
+            
         }
         return saveData;
 
     }
+
+    public static void DeleteSaveFile()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "Save.data");
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Debug.Log("Save file deleted.");
+        }
+        else
+        {
+            Debug.LogWarning("Save file not found.");
+        }
+    }
+
 }
