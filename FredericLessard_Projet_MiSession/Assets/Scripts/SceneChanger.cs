@@ -19,8 +19,7 @@ public class SceneChanger : MonoBehaviour
 
     public void GameplayScene() {
 
-        //SceneManager.LoadScene(levelData.sceneName);
-        //Addressables.LoadAssetAsync<UnityEngine.Object>(levelData.sceneName).Completed += SceneLoader_Completed;
+        
         Addressables.LoadSceneAsync(levelData.sceneName, LoadSceneMode.Single);
         Addressables.LoadAssetAsync<AudioClip>("Music_ChipMode").Completed += MusicPlayer_Completed;
     }

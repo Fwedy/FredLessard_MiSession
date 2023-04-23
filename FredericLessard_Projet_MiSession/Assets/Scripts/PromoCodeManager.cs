@@ -64,17 +64,9 @@ public class PromoCodeManager : MonoBehaviour
     public IEnumerator GetCode(string code)
     {
 
-        usedCode = code;                                                                           //add variable
+        usedCode = code;                                                                        
         code = Uri.EscapeUriString("{\"Code\":\"" + code.Replace("\u200B", "") + "\"}");
-        /*string uri = "https://parseapi.back4app.com/classes/promocode/?where=" + code;
-
-        Debug.Log(uri);
-        using (var request = UnityWebRequest.Get(uri))
-        {
-            
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-          */
+    
         using (var request = new WebRequestBuilder()
             .SetUrl("classes/promocode/?where=" + code)
             .SetType("GET")
@@ -102,8 +94,7 @@ public class PromoCodeManager : MonoBehaviour
             }
            
                 var used_matches = Regex.Matches(request.downloadHandler.text, "\"Used\":(\\w+)", RegexOptions.Multiline);
-                //string _code;
-                //var match = JsonConvert.SerializeObject(request.downloadHandler.text);
+                
 
 
                 bool used = bool.Parse(used_matches.Last().Groups[1].Value);
@@ -127,7 +118,7 @@ public class PromoCodeManager : MonoBehaviour
 
     public IEnumerator ReturnUsedCode(string objectID)
     {                   
-        //add variable, not hard coded
+       
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/promocode/"+objectID, "PUT"))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
