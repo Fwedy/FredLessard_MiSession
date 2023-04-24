@@ -15,6 +15,7 @@ public class AutoTester : MonoBehaviour
     private bool autoTesting = false;
     private Vector2 direction;
 
+    private float pause = 0f;
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -29,11 +30,17 @@ public class AutoTester : MonoBehaviour
             
             StartCoroutine(StartTester());
         }
-        
+
+        if (pause > 0)
+        {
+            pause -= Time.deltaTime;
+            return;
+        }
         if (autoTesting)
         {
             if (Vector2.Distance((Vector2)player.transform.position, targetPosition) <= 0.5f)
             {
+                pause = 3f;
                 targetPosition = RandomPointInBounds(mapBounds.bounds);
                 direction = targetPosition - (Vector2)transform.position;
                 direction.Normalize();
@@ -89,6 +96,7 @@ public class AutoTester : MonoBehaviour
 
     private IEnumerator AutoWalk()
     {
+        
         targetPosition = RandomPointInBounds(mapBounds.bounds);
         direction = targetPosition - (Vector2)transform.position;
         direction.Normalize();

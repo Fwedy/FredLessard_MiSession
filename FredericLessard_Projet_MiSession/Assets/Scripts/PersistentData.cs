@@ -37,7 +37,7 @@ public static class PersistentData {
         }
         catch (SerializationException e)
         {
-            Debug.LogError("Failed to serialize. Reason: " + e.Message);
+            Debug.LogError("Failed: " + e.Message);
             throw;
         }
         finally
@@ -70,7 +70,7 @@ public static class PersistentData {
             }
             catch (SerializationException e)
             {
-                Debug.LogError("Failed to deserialize. Reason: " + e.Message);
+                Debug.LogError("Failed : " + e.Message);
                 throw;
             }
             finally
